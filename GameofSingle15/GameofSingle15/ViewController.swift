@@ -10,13 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let screensize : CGRect = UIScreen.mainScreen().bounds
+    @IBOutlet weak var playgroundView: UIImageView! //an image view for playground to add to
     
+    @IBOutlet weak var timerLabel: UILabel! // diaplay timer
+    
+    @IBOutlet weak var movesLabel: UILabel! // display moves
+    
+    var gameTimer = NSTimer()
+    var timerCounter = 0
+    let startTime = "00:00"
+    
+    var movesCounter = 0
+    let startMove = "0"
+    
+    let screensize : CGRect = UIScreen.mainScreen().bounds
     
     let viewFrameMargin = 10 //margin around entire edge
     let cellFrameMargin = 2  //margin around each cell
-    let rows  = 4; //4x4 game initially
-    let cols  = 4;
+    let rows  = 3; //4x4 game initially
+    let cols  = 3;
     
     var emptyCellX = 0
     var emptyCellY = 0
@@ -69,7 +81,15 @@ class ViewController: UIViewController {
                     timeOfLastAnimation += timeOfThisAnimation
                     timeOfThisAnimation = 0.1 * distance
                     self.view.bringSubviewToFront(myBoard[Int(cgb.x)][Int(cgb.y)]!)
-                    UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.x = destCenter.x ; self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.y = destCenter.y }, completion: nil)
+                    
+                    if(row == rows-1 && col == cols-1)
+                    {
+                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.x = destCenter.x ; self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.y = destCenter.y }, completion: {finished in self.startTimer()})
+                    }
+                    else
+                    {
+                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.x = destCenter.x ; self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.y = destCenter.y }, completion: nil)
+                    }
                 }
 
                 BoardSwap(cga, b: cgb) //swap them
@@ -100,10 +120,12 @@ class ViewController: UIViewController {
             //let msgAlert = UIAlertView(title: "VICTORY", message: "You Won!!!!", delegate: nil, cancelButtonTitle: "Play Again")
             //let msgAlert = UIAlertController(title: "VICTORY", message: "You Won!!!!", preferredStyle: .Alert)
             //msgAlert.show()
-            let alert = UIAlertController(title: "VICTORY!", message:"YOU WIN!!!", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+            
+            gameOver()
+            let alert = UIAlertController(title: "VICTORY!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
+            alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
             self.presentViewController(alert, animated: true){}
-            RandomizeLayout() //sets up for next game
         }
         
     }
@@ -138,8 +160,6 @@ class ViewController: UIViewController {
             }
         }) //completion
         BoardSwap(cgFrom, b: cgTo) //swap data in the board array (swaps nil for button in this case)
-
-        
     }
     
     func traverseAndMoveAllPossible(cgFrom: CGPoint, cgTo: CGPoint) {
@@ -201,7 +221,6 @@ class ViewController: UIViewController {
         } else {
             print("traverseAndMoveAllPossible -- cgs not aligned on axis /n")
         }
-    
     }
     
     func buttonTouched(sender:UIButton!)
@@ -219,6 +238,8 @@ class ViewController: UIViewController {
             traverseAndMoveAllPossible(cga, cgTo: CGPoint(x: CGFloat(0), y: cga.y)) ////look from this cell all the way left
             traverseAndMoveAllPossible(cga, cgTo: CGPoint(x: CGFloat(cols-1), y: cga.y)) //look from this cell all the way right
         }
+        movesCounter+=1 // Add one move after each click on any button!
+        movesLabel.text = String(movesCounter)
     }
     
     var myBoard = [[UIButton?]]() //board is initially empty    //var myBoard : [[UIButton?]] = nil
@@ -240,6 +261,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
 
         //Init Globals
@@ -248,7 +270,12 @@ class ViewController: UIViewController {
         
         offsetX0 = viewFrameMargin + cellFrameMargin + (cellWidth / 2)
         offsetY0 = viewFrameMargin + cellFrameMargin + (cellHeight / 2)
- 
+        
+        timerLabel.layer.borderWidth  = 2
+        timerLabel.layer.borderColor  = UIColor.greenColor().CGColor
+        
+        movesLabel.layer.borderWidth  = 2
+        movesLabel.layer.borderColor  = UIColor.greenColor().CGColor
         
         myBoard.removeAll() //start clean
         for col in (0..<cols) {
@@ -263,7 +290,7 @@ class ViewController: UIViewController {
                     button.layer.borderWidth = 1
                     button.layer.borderColor = UIColor.greenColor().CGColor
                     button.addTarget(self, action: #selector(ViewController.buttonTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-                    self.view.addSubview(button)
+                    self.playgroundView.addSubview(button)
                     
                     colOfBoard.append(button)
                     //myBoard[col][row] = button
@@ -282,16 +309,52 @@ class ViewController: UIViewController {
         RandomizeLayout()
         BoardIntegrityCheck()
         
+        timerLabel.text = startTime
         
     }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    // This function counts time in seconds
+    func updateCounter() {
+        timerCounter+=1
+        
+        let strSeconds = String(format: "%02d", timerCounter % 60)
+        let strMinutes = String(format: "%02d", timerCounter / 60)
+        
+        timerLabel.text = strMinutes + ":" + strSeconds
+    }
+    
+    func startTimer() {
+        gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
+    }
+    
+    func gameOver(){
+        gameTimer.invalidate()
+    }
+    
+    func restartGame(){
+        gameTimer.invalidate()
+        timerCounter = 0
+        movesCounter = 0
+        timerLabel.text = startTime
+        movesLabel.text = startMove
+        RandomizeLayout()
+    }
+    
+    @IBAction func stopGame(sender: AnyObject) {
+        gameOver()
+    }
+    
+    @IBAction func refreshTimer(sender: AnyObject) {
+        restartGame()
+    }
 }
 
