@@ -131,6 +131,8 @@ class ViewController: UIViewController {
             //let msgAlert = UIAlertController(title: "VICTORY", message: "You Won!!!!", preferredStyle: .Alert)
             //msgAlert.show()
             
+            self.gameStop()
+            
             let alert = UIAlertController(title: "VICTORY!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
@@ -140,6 +142,8 @@ class ViewController: UIViewController {
     
     // This function display an alert when time is out
     func timeOut(){
+        self.gameStop()
+        
         let alert = UIAlertController(title: "TimeOut!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
         alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
@@ -171,7 +175,6 @@ class ViewController: UIViewController {
        //UIView.animateWithDuration(0.5, animations: {sender.center.x = destCenter.x ; sender.center.y = destCenter.y })
         UIView.animateWithDuration(0.25, delay: 0, options: .CurveLinear, animations: {button.center.x = destCenter.x ; button.center.y = destCenter.y ; self.isMoved = true}, completion: {finished in
             if (finished) {
-                self.gameStop()
                 self.ckIfYouWon()
             }
         }) //completion
@@ -379,7 +382,7 @@ class ViewController: UIViewController {
     }
     
     func restartGame(){
-        gameTimer.invalidate()
+        gameStop()
         
         timerCounter = 0
         movesCounter = 0
