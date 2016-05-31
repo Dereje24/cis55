@@ -7,34 +7,42 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewController: UIViewController {
-    
-    @IBOutlet weak var playgroundView: UIImageView! //an image view for playground to add to
-    
+   
     @IBOutlet weak var timerLabel: UILabel! // diaplay timer
-    
     @IBOutlet weak var movesLabel: UILabel! // display moves
+    
+    let backgroundView = UIImageView() // set background view
+    let playgroundView = UIImageView() // an image view for playground to add on
+    let pausedView = UIImageView() // display an image view when game is paused
+    let cancelPauseBtn = UIButton(type: .Custom) // a cancel button displaying on pausedView
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark)) // display a blurry view when paused
+    
+    let startTime = "00:00"
+    let startMove = "0"
+    let totalTime = 3600 // in seconds
     
     var gameTimer = NSTimer()
     var timerCounter = 0
-    let startTime = "00:00"
-    
     var movesCounter = 0
-    let startMove = "0"
+    var isPaused = false // flag for determing if the playground is paused
+    var randomizeIsFinished = false // flag for determing if ramdomizeLayout is finished
+    var isMoved = false // flag for determing if a number is moved successfully
     
     let screensize : CGRect = UIScreen.mainScreen().bounds
     
     let viewFrameMargin = 10 //margin around entire edge
     let cellFrameMargin = 2  //margin around each cell
-    let rows  = 3; //4x4 game initially
-    let cols  = 3;
+    let rows  = 4; //4x4 game initially
+    let cols  = 4;
     
     var emptyCellX = 0
     var emptyCellY = 0
     
     
-//  Declare Globals
+    //  Declare Globals
     var cellWidth : Int = 0
     var cellHeight : Int = 0
     var offsetX0 : Int = 0
@@ -54,6 +62,8 @@ class ViewController: UIViewController {
     
     
     func RandomizeLayout()->Void {
+        randomizeIsFinished = false
+        
         //go thru every board position, and swap it's tile with another randomly chosen tile
         var timeOfThisAnimation = 0.0
         var timeOfLastAnimation = 0.0
@@ -121,13 +131,19 @@ class ViewController: UIViewController {
             //let msgAlert = UIAlertController(title: "VICTORY", message: "You Won!!!!", preferredStyle: .Alert)
             //msgAlert.show()
             
-            gameOver()
             let alert = UIAlertController(title: "VICTORY!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
             self.presentViewController(alert, animated: true){}
         }
-        
+    }
+    
+    // This function display an alert when time is out
+    func timeOut(){
+        let alert = UIAlertController(title: "TimeOut!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
+        alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
+        self.presentViewController(alert, animated: true){}
     }
     
     func BoardIntegrityCheck()->Bool {
@@ -149,13 +165,13 @@ class ViewController: UIViewController {
         // moves board piece at cgFrom to cgTo, updating board data structure and initiating button animcation on screen
         // assumes board[cgTo] is nil
         
-        
         let destCenter = CGPointFromArray(cgTo)
         let button = myBoard[Int(cgFrom.x)][Int(cgFrom.y)]!
         
        //UIView.animateWithDuration(0.5, animations: {sender.center.x = destCenter.x ; sender.center.y = destCenter.y })
-        UIView.animateWithDuration(0.25, delay: 0, options: .CurveLinear, animations: {button.center.x = destCenter.x ; button.center.y = destCenter.y }, completion: {finished in
+        UIView.animateWithDuration(0.25, delay: 0, options: .CurveLinear, animations: {button.center.x = destCenter.x ; button.center.y = destCenter.y ; self.isMoved = true}, completion: {finished in
             if (finished) {
+                self.gameStop()
                 self.ckIfYouWon()
             }
         }) //completion
@@ -228,6 +244,8 @@ class ViewController: UIViewController {
             if you can verify you have a neighbor that is free, swap these two cells and update button location
          */
     {
+        isMoved = false // Set flag back to false: click on a button may not cause a move
+        
         let cga = CGArrayFromPoint(sender.center)
         let x = Int(cga.x)
         let y = Int(cga.y)
@@ -238,8 +256,11 @@ class ViewController: UIViewController {
             traverseAndMoveAllPossible(cga, cgTo: CGPoint(x: CGFloat(0), y: cga.y)) ////look from this cell all the way left
             traverseAndMoveAllPossible(cga, cgTo: CGPoint(x: CGFloat(cols-1), y: cga.y)) //look from this cell all the way right
         }
-        movesCounter+=1 // Add one move after each click on any button!
-        movesLabel.text = String(movesCounter)
+        if(isMoved == true){
+            movesCounter+=1 // Move counter + 1 after each move!
+            movesLabel.text = String(movesCounter)
+        }
+        
     }
     
     var myBoard = [[UIButton?]]() //board is initially empty    //var myBoard : [[UIButton?]] = nil
@@ -261,8 +282,20 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Init background view
+        backgroundView.frame = CGRectMake(0, 0, 414, 736)
+        backgroundView.image = UIImage(named: "background")
+        self.view.addSubview(backgroundView)
+        
+        // Init playground view
+        playgroundView.frame = CGRectMake(7, 300, 407, 400)
+        self.backgroundView.addSubview(playgroundView)
+        
+        // Enable User interactions 
+        backgroundView.userInteractionEnabled = true
+        playgroundView.userInteractionEnabled = true
 
         //Init Globals
         cellWidth = ((Int(screensize.width) - (2 * viewFrameMargin)) / cols) - (2 * cellFrameMargin)
@@ -272,10 +305,10 @@ class ViewController: UIViewController {
         offsetY0 = viewFrameMargin + cellFrameMargin + (cellHeight / 2)
         
         timerLabel.layer.borderWidth  = 2
-        timerLabel.layer.borderColor  = UIColor.greenColor().CGColor
+        timerLabel.layer.borderColor  = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor
         
         movesLabel.layer.borderWidth  = 2
-        movesLabel.layer.borderColor  = UIColor.greenColor().CGColor
+        movesLabel.layer.borderColor  = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor
         
         myBoard.removeAll() //start clean
         for col in (0..<cols) {
@@ -284,11 +317,12 @@ class ViewController: UIViewController {
                 if !((row == rows-1) && (col == cols-1)) { //leave last cell empty
                     let button = UIButton(frame: CGRectMake(0,0, CGFloat(cellWidth - (2 * cellFrameMargin)), CGFloat(cellHeight - (2 * cellFrameMargin))))
                     button.center = CGPointFromArray(CGPointMake(CGFloat(col), CGFloat(row)))
-                    button.backgroundColor = UIColor.redColor()//setting backgroundColor
+                    button.backgroundColor = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1)
+                    //button.backgroundColor = UIColor.redColor()//setting backgroundColor
                     button.setTitle((col + 1 + (row * cols)).description, forState: UIControlState.Normal)
                     button.layer.cornerRadius = 5
                     button.layer.borderWidth = 1
-                    button.layer.borderColor = UIColor.greenColor().CGColor
+                    button.layer.borderColor = UIColor.whiteColor().CGColor
                     button.addTarget(self, action: #selector(ViewController.buttonTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     self.playgroundView.addSubview(button)
                     
@@ -304,13 +338,11 @@ class ViewController: UIViewController {
             //now that we're done creating all buttons in this row, append it
             myBoard.append(colOfBoard)
         } //for col
-
         
         RandomizeLayout()
         BoardIntegrityCheck()
         
         timerLabel.text = startTime
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -322,7 +354,7 @@ class ViewController: UIViewController {
         return true
     }
     
-    // This function counts time in seconds
+    // This function counts seconds
     func updateCounter() {
         timerCounter+=1
         
@@ -330,31 +362,75 @@ class ViewController: UIViewController {
         let strMinutes = String(format: "%02d", timerCounter / 60)
         
         timerLabel.text = strMinutes + ":" + strSeconds
+        
+        if(timerCounter == totalTime){
+            timeOut()
+        }
     }
     
     func startTimer() {
         gameTimer = NSTimer.scheduledTimerWithTimeInterval(1, target:self, selector: #selector(ViewController.updateCounter), userInfo: nil, repeats: true)
+        
+        randomizeIsFinished = true
     }
     
-    func gameOver(){
+    func gameStop(){
         gameTimer.invalidate()
     }
     
     func restartGame(){
         gameTimer.invalidate()
+        
         timerCounter = 0
         movesCounter = 0
         timerLabel.text = startTime
         movesLabel.text = startMove
+        
         RandomizeLayout()
     }
     
-    @IBAction func stopGame(sender: AnyObject) {
-        gameOver()
+    func didClickCancelPauseBtn(sender: UIButton!){
+        pausedView.removeFromSuperview()
+        
+        startTimer()
+        
+        isPaused = false
+    }
+    
+    // When pause button is clicked, it displays a blurry image view to cover the playground
+    @IBAction func pauseGame(sender: AnyObject) {
+        
+        if(randomizeIsFinished == true && isPaused == false){
+            gameStop()
+            
+            // Create the paused view
+            pausedView.frame = CGRectMake(0, 0, playgroundView.frame.width, playgroundView.frame.height)
+            self.playgroundView.addSubview(pausedView)
+            pausedView.userInteractionEnabled = true
+            
+            // Create blur view 
+            blurEffectView.frame = pausedView.bounds
+            //For device rotation
+            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            pausedView.addSubview(blurEffectView)
+            
+            // Create the cancel button
+            cancelPauseBtn.frame = CGRectMake(pausedView.frame.width - 60, 0, 60, 60)
+            let cancelImage = UIImage(named: "cancel")
+            cancelPauseBtn.setImage(cancelImage, forState: UIControlState.Normal)
+            pausedView.addSubview(cancelPauseBtn)
+            
+            cancelPauseBtn.addTarget(self, action: #selector(ViewController.didClickCancelPauseBtn(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            
+            isPaused = true
+        }
     }
     
     @IBAction func refreshTimer(sender: AnyObject) {
-        restartGame()
+        if (randomizeIsFinished == true && isPaused == false){
+            restartGame()
+        }
     }
 }
+
 

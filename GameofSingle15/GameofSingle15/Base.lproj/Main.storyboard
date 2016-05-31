@@ -17,18 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="lgo-Cq-mx2" userLabel="background">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                                </variation>
-                            </imageView>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yqX-U1-tVd">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="7" y="300" width="407" height="400"/>
-                                </variation>
-                            </imageView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ss2-St-rvn">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <color key="barTintColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -40,10 +28,10 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Game of Single 15" id="H5O-Gt-2bD">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="QOm-Va-tv6">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="pause" id="QOm-Va-tv6">
                                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <connections>
-                                                <action selector="stopGame:" destination="BYZ-38-t0r" id="UaD-rN-dzy"/>
+                                                <action selector="pauseGame:" destination="BYZ-38-t0r" id="0on-N1-57D"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="9CX-Lu-cA1">
@@ -63,6 +51,7 @@
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
                                 <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="47" y="98" width="125" height="57"/>
                                 </variation>
@@ -90,16 +79,15 @@
                                 <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="20"/>
                                 <nil key="highlightedColor"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="234" y="98" width="125" height="57"/>
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="lgo-Cq-mx2"/>
-                                <exclude reference="yqX-U1-tVd"/>
                                 <exclude reference="Ss2-St-rvn"/>
                                 <exclude reference="gdL-3A-NDk"/>
                                 <exclude reference="P8j-8H-D0k"/>
@@ -109,8 +97,6 @@
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
-                                <include reference="lgo-Cq-mx2"/>
-                                <include reference="yqX-U1-tVd"/>
                                 <include reference="Ss2-St-rvn"/>
                                 <include reference="gdL-3A-NDk"/>
                                 <include reference="P8j-8H-D0k"/>
@@ -122,7 +108,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="movesLabel" destination="gdL-3A-NDk" id="J9y-QQ-1mu"/>
-                        <outlet property="playgroundView" destination="yqX-U1-tVd" id="8zK-hc-fUE"/>
                         <outlet property="timerLabel" destination="l4A-eU-qyZ" id="4xK-GU-TXW"/>
                     </connections>
                 </viewController>
@@ -131,7 +116,4 @@
             <point key="canvasLocation" x="447" y="437"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="background" width="1080" height="1920"/>
-    </resources>
 </document>
