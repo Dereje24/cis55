@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Foundation
 
 class ViewController: UIViewController {
    
@@ -16,15 +15,14 @@ class ViewController: UIViewController {
     
     let backgroundView = UIImageView() // set background view
     let playgroundView = UIImageView() // an image view for playground to add on
-    let pausedView = UIImageView() // display an image view when game is paused
+    let pausedView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark)) // display a blurry view when paused
     let cancelPauseBtn = UIButton(type: .Custom) // a cancel button displaying on pausedView
-    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark)) // display a blurry view when paused
     
     let startTime = "00:00"
     let startMove = "0"
     let totalTime = 3600 // in seconds
     
-    var gameTimer = NSTimer()
+    var gameTimer = NSTimer() //Declare a timer
     var timerCounter = 0
     var movesCounter = 0
     var isPaused = false // flag for determing if the playground is paused
@@ -40,7 +38,6 @@ class ViewController: UIViewController {
     
     var emptyCellX = 0
     var emptyCellY = 0
-    
     
     //  Declare Globals
     var cellWidth : Int = 0
@@ -263,7 +260,6 @@ class ViewController: UIViewController {
             movesCounter+=1 // Move counter + 1 after each move!
             movesLabel.text = String(movesCounter)
         }
-        
     }
     
     var myBoard = [[UIButton?]]() //board is initially empty    //var myBoard : [[UIButton?]] = nil
@@ -288,7 +284,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Init background view
-        backgroundView.frame = CGRectMake(0, 0, 414, 736)
+        backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         backgroundView.image = UIImage(named: "background")
         self.view.addSubview(backgroundView)
         
@@ -394,7 +390,6 @@ class ViewController: UIViewController {
     
     func didClickCancelPauseBtn(sender: UIButton!){
         pausedView.removeFromSuperview()
-        
         startTimer()
         
         isPaused = false
@@ -406,16 +401,9 @@ class ViewController: UIViewController {
         if(randomizeIsFinished == true && isPaused == false){
             gameStop()
             
-            // Create the paused view
-            pausedView.frame = CGRectMake(0, 0, playgroundView.frame.width, playgroundView.frame.height)
-            self.playgroundView.addSubview(pausedView)
-            pausedView.userInteractionEnabled = true
-            
             // Create blur view 
-            blurEffectView.frame = pausedView.bounds
-            //For device rotation
-            blurEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-            pausedView.addSubview(blurEffectView)
+            pausedView.frame = CGRectMake(0, 0, playgroundView.frame.width, playgroundView.frame.height)
+            playgroundView.addSubview(pausedView)
             
             // Create the cancel button
             cancelPauseBtn.frame = CGRectMake(pausedView.frame.width - 60, 0, 60, 60)
