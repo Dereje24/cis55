@@ -289,7 +289,7 @@ class ViewController: UIViewController {
         self.view.addSubview(backgroundView)
         
         // Init playground view
-        playgroundView.frame = CGRectMake(7, 300, 407, 400)
+        playgroundView.frame = CGRectMake(7, 300, view.frame.width-7, 400)
         self.backgroundView.addSubview(playgroundView)
         
         // Enable User interactions 
