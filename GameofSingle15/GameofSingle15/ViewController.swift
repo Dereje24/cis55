@@ -133,7 +133,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     }
     
     func ckIfYouWon()->Void {
-        if (true /*youWon()*/) {
+        if (youWon()) {
             //let msgAlert = UIAlertView(title: "VICTORY", message: "You Won!!!!", delegate: nil, cancelButtonTitle: "Play Again")
             //let msgAlert = UIAlertController(title: "VICTORY", message: "You Won!!!!", preferredStyle: .Alert)
             //msgAlert.show()
