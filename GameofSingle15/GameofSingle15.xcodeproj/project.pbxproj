@@ -12,6 +12,10 @@
 		C4905DC21CE66CFF00E21602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4905DC01CE66CFF00E21602 /* Main.storyboard */; };
 		C4905DC41CE66CFF00E21602 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4905DC31CE66CFF00E21602 /* Assets.xcassets */; };
 		C4905DC71CE66CFF00E21602 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4905DC51CE66CFF00E21602 /* LaunchScreen.storyboard */; };
+		E3B8FC5C1D00DFF60045672B /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8FC5B1D00DFF60045672B /* DataController.swift */; };
+		E3B8FC821D0151E50045672B /* GameDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E3B8FC801D0151E50045672B /* GameDataModel.xcdatamodeld */; };
+		E3B8FC881D01526D0045672B /* TimeRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8FC841D01526D0045672B /* TimeRecords.swift */; };
+		E3B8FC8A1D01526D0045672B /* MoveRecords.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B8FC861D01526D0045672B /* MoveRecords.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		C4905DC31CE66CFF00E21602 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4905DC61CE66CFF00E21602 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4905DC81CE66CFF00E21602 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E3B8FC5B1D00DFF60045672B /* DataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
+		E3B8FC811D0151E50045672B /* GameDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GameDataModel.xcdatamodel; sourceTree = "<group>"; };
+		E3B8FC841D01526D0045672B /* TimeRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeRecords.swift; sourceTree = "<group>"; };
+		E3B8FC861D01526D0045672B /* MoveRecords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoveRecords.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +46,8 @@
 		C4905DB01CE66CFE00E21602 = {
 			isa = PBXGroup;
 			children = (
+				E3B8FC841D01526D0045672B /* TimeRecords.swift */,
+				E3B8FC861D01526D0045672B /* MoveRecords.swift */,
 				C4905DBB1CE66CFF00E21602 /* GameofSingle15 */,
 				C4905DBA1CE66CFF00E21602 /* Products */,
 			);
@@ -60,6 +70,8 @@
 				C4905DC31CE66CFF00E21602 /* Assets.xcassets */,
 				C4905DC51CE66CFF00E21602 /* LaunchScreen.storyboard */,
 				C4905DC81CE66CFF00E21602 /* Info.plist */,
+				E3B8FC5B1D00DFF60045672B /* DataController.swift */,
+				E3B8FC801D0151E50045672B /* GameDataModel.xcdatamodeld */,
 			);
 			path = GameofSingle15;
 			sourceTree = "<group>";
@@ -136,7 +148,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4905DBF1CE66CFF00E21602 /* ViewController.swift in Sources */,
+				E3B8FC5C1D00DFF60045672B /* DataController.swift in Sources */,
+				E3B8FC881D01526D0045672B /* TimeRecords.swift in Sources */,
+				E3B8FC8A1D01526D0045672B /* MoveRecords.swift in Sources */,
 				C4905DBD1CE66CFF00E21602 /* AppDelegate.swift in Sources */,
+				E3B8FC821D0151E50045672B /* GameDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +309,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E3B8FC801D0151E50045672B /* GameDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E3B8FC811D0151E50045672B /* GameDataModel.xcdatamodel */,
+			);
+			currentVersion = E3B8FC811D0151E50045672B /* GameDataModel.xcdatamodel */;
+			path = GameDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = C4905DB11CE66CFE00E21602 /* Project object */;
 }

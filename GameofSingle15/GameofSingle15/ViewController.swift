@@ -2,21 +2,23 @@
 //  ViewController.swift
 //  GameofSingle15
 //
-//  Created by Greg Simons 3rd on 5/13/16.
+//  Created by Greg Simons 3rd on 5/13/16. Modified by Jun Li on 5/28/16.
 //  Copyright © 2016 GregSimons. All rights reserved.
 //
 
 import UIKit
+import CoreData
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
    
-    @IBOutlet weak var timerLabel: UILabel! // diaplay timer
-    @IBOutlet weak var movesLabel: UILabel! // display moves
+    @IBOutlet weak var timerLabel: UILabel! // diaplay current timer
+    @IBOutlet weak var movesLabel: UILabel! // display current moves
+    @IBOutlet weak var showBestTimeLabel: UILabel! //display best time record
+    @IBOutlet weak var showBestMoveLabel: UILabel! // display best move record
     
     let backgroundView = UIImageView() // set background view
     let playgroundView = UIImageView() // an image view for playground to add on
     let pausedView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark)) // display a blurry view when paused
-    let cancelPauseBtn = UIButton(type: .Custom) // a cancel button displaying on pausedView
     
     let startTime = "00:00"
     let startMove = "0"
@@ -28,6 +30,14 @@ class ViewController: UIViewController {
     var isPaused = false // flag for determing if the playground is paused
     var randomizeIsFinished = false // flag for determing if ramdomizeLayout is finished
     var isMoved = false // flag for determing if a number is moved successfully
+    
+    let moc = DataController().managedObjectContext // instance of our managedObjectContext
+    var frcMove : NSFetchedResultsController!
+    var frcTime : NSFetchedResultsController!
+    var moveArr = [MoveRecords]() // Declare an array to store move records
+    var timeArr = [TimeRecords]() // Declare an array to store time records
+    var newMoveRecord : MoveRecords!
+    var newTimeRecord : TimeRecords!
     
     let screensize : CGRect = UIScreen.mainScreen().bounds
     
@@ -123,16 +133,19 @@ class ViewController: UIViewController {
     }
     
     func ckIfYouWon()->Void {
-        if (youWon()) {
+        if (true /*youWon()*/) {
             //let msgAlert = UIAlertView(title: "VICTORY", message: "You Won!!!!", delegate: nil, cancelButtonTitle: "Play Again")
             //let msgAlert = UIAlertController(title: "VICTORY", message: "You Won!!!!", preferredStyle: .Alert)
             //msgAlert.show()
+            
+            saveRecords()
             
             self.gameStop()
             
             let alert = UIAlertController(title: "VICTORY!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
+            //attempt to present uialertcontroller which is already presenting!!
             self.presentViewController(alert, animated: true){}
         }
     }
@@ -144,6 +157,7 @@ class ViewController: UIViewController {
         let alert = UIAlertController(title: "TimeOut!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
         alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
+        //attempt to present uialertcontroller which is already presenting!!
         self.presentViewController(alert, animated: true){}
     }
     
@@ -283,6 +297,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        updateRecordsOnLabel()
+        
         // Init background view
         backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
         backgroundView.image = UIImage(named: "background")
@@ -295,19 +311,19 @@ class ViewController: UIViewController {
         // Enable User interactions 
         backgroundView.userInteractionEnabled = true
         playgroundView.userInteractionEnabled = true
-
-        //Init Globals
-        cellWidth = ((Int(screensize.width) - (2 * viewFrameMargin)) / cols) - (2 * cellFrameMargin)
-        cellHeight = cellWidth //was (((screensize.height) - (2 * viewFrameMargin)) / rows) - (2 * cellFrameMargin)
-        
-        offsetX0 = viewFrameMargin + cellFrameMargin + (cellWidth / 2)
-        offsetY0 = viewFrameMargin + cellFrameMargin + (cellHeight / 2)
         
         timerLabel.layer.borderWidth  = 2
         timerLabel.layer.borderColor  = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor
         
         movesLabel.layer.borderWidth  = 2
         movesLabel.layer.borderColor  = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor
+        
+        //Init Globals
+        cellWidth = ((Int(screensize.width) - (2 * viewFrameMargin)) / cols) - (2 * cellFrameMargin)
+        cellHeight = cellWidth //was (((screensize.height) - (2 * viewFrameMargin)) / rows) - (2 * cellFrameMargin)
+        
+        offsetX0 = viewFrameMargin + cellFrameMargin + (cellWidth / 2)
+        offsetY0 = viewFrameMargin + cellFrameMargin + (cellHeight / 2)
         
         myBoard.removeAll() //start clean
         for col in (0..<cols) {
@@ -347,6 +363,12 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateRecordsOnLabel()
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -398,6 +420,8 @@ class ViewController: UIViewController {
     // When pause button is clicked, it displays a blurry image view to cover the playground
     @IBAction func pauseGame(sender: AnyObject) {
         
+        let cancelPauseBtn = UIButton(type: .Custom) // a cancel button displaying on pausedView
+        
         if(randomizeIsFinished == true && isPaused == false){
             gameStop()
             
@@ -422,6 +446,95 @@ class ViewController: UIViewController {
             restartGame()
         }
     }
+    
+    // Func to fetch the records in CoreData
+    func fetch()->Bool{
+        
+        let frMove = NSFetchRequest(entityName: "MoveRecords")
+        let sdMove = NSSortDescriptor(key: "iMove", ascending: true)
+        frMove.sortDescriptors = [sdMove]
+        frcMove = NSFetchedResultsController(fetchRequest: frMove, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        frcMove.delegate = self
+        
+        let frTime = NSFetchRequest(entityName: "TimeRecords")
+        let sdTime = NSSortDescriptor(key: "iTime", ascending: true)
+        frTime.sortDescriptors = [sdTime]
+        frcTime = NSFetchedResultsController(fetchRequest: frTime, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        frcTime.delegate = self
+        
+        var error: NSError? = nil
+        let count = moc.countForFetchRequest(frMove, error: &error)
+        
+        do {
+            try frcMove.performFetch()
+            try frcTime.performFetch()
+        } catch {
+            fatalError("Warning warning fatal error happened: \(error)")
+        }
+        
+        moveArr = frcMove.fetchedObjects as! [MoveRecords]
+        timeArr = frcTime.fetchedObjects as! [TimeRecords]
+        
+        if (count == 0){
+            return false
+        }
+        else{
+            return true
+        }
+    }
+    
+    // Func to save new records
+    // This function is only called when the game is won
+    func saveRecords(){
+        
+        //let myMOC = DataController().managedObjectContext
+        
+        newMoveRecord = NSEntityDescription.insertNewObjectForEntityForName("MoveRecords", inManagedObjectContext: moc) as! MoveRecords
+        newTimeRecord = NSEntityDescription.insertNewObjectForEntityForName("TimeRecords", inManagedObjectContext: moc) as! TimeRecords
+        
+        newMoveRecord.iMove = movesCounter
+        newTimeRecord.iTime = timerCounter
+        
+        do
+        {
+            try moc.save()
+        }
+        catch
+        {
+            print(error)
+            return
+        }
+    }
+    
+    func updateRecordsOnLabel(){
+        
+        if(!fetch()){
+            showBestMoveLabel.text = "No Record Yet"
+            showBestTimeLabel.text = "No Record Yet"
+        }
+        else{
+            let convertedInt = timeArr[0].iTime.integerValue
+            
+            let strSeconds = String(format: "%02d", convertedInt % 60)
+            let strMinutes = String(format: "%02d", convertedInt / 60)
+            
+            showBestMoveLabel.text = "Move Rec: " + String(moveArr[0].iMove)
+            showBestTimeLabel.text = "Time Rec: " + strMinutes + ":" + strSeconds
+        }
+    }
+    
+    //Updating funcs
+    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+        
+    }
+    
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        updateRecordsOnLabel()
+    }
+    func controllerDidChangeContent(controller: NSFetchedResultsController){
+    }
+
 }
 
 
