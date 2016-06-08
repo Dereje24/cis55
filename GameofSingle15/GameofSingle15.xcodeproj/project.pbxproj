@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B86EC3681D08D68200F27579 /* InstructionViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */; };
+		B86EC36A1D08D6FC00F27579 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3691D08D6FC00F27579 /* OptionViewController.swift */; };
+		B86EC36C1D08D74600F27579 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36B1D08D74600F27579 /* RecordViewController.swift */; };
+		B86EC36E1D08D84000F27579 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36D1D08D84000F27579 /* InitialViewController.swift */; };
+		B86EC3701D08DAC600F27579 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36F1D08DAC600F27579 /* GameObject.swift */; };
 		C4905DBD1CE66CFF00E21602 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4905DBC1CE66CFF00E21602 /* AppDelegate.swift */; };
 		C4905DBF1CE66CFF00E21602 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4905DBE1CE66CFF00E21602 /* ViewController.swift */; };
 		C4905DC21CE66CFF00E21602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4905DC01CE66CFF00E21602 /* Main.storyboard */; };
@@ -19,6 +24,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionViewViewController.swift; sourceTree = "<group>"; };
+		B86EC3691D08D6FC00F27579 /* OptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
+		B86EC36B1D08D74600F27579 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
+		B86EC36D1D08D84000F27579 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		B86EC36F1D08DAC600F27579 /* GameObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		C4905DB91CE66CFF00E21602 /* GameofSingle15.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameofSingle15.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4905DBC1CE66CFF00E21602 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4905DBE1CE66CFF00E21602 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,11 +77,16 @@
 				C4905DBC1CE66CFF00E21602 /* AppDelegate.swift */,
 				C4905DBE1CE66CFF00E21602 /* ViewController.swift */,
 				C4905DC01CE66CFF00E21602 /* Main.storyboard */,
+				B86EC36F1D08DAC600F27579 /* GameObject.swift */,
+				B86EC36D1D08D84000F27579 /* InitialViewController.swift */,
+				B86EC36B1D08D74600F27579 /* RecordViewController.swift */,
+				B86EC3691D08D6FC00F27579 /* OptionViewController.swift */,
 				C4905DC31CE66CFF00E21602 /* Assets.xcassets */,
 				C4905DC51CE66CFF00E21602 /* LaunchScreen.storyboard */,
 				C4905DC81CE66CFF00E21602 /* Info.plist */,
 				E3B8FC5B1D00DFF60045672B /* DataController.swift */,
 				E3B8FC801D0151E50045672B /* GameDataModel.xcdatamodeld */,
+				B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */,
 			);
 			path = GameofSingle15;
 			sourceTree = "<group>";
@@ -147,12 +162,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B86EC3701D08DAC600F27579 /* GameObject.swift in Sources */,
 				C4905DBF1CE66CFF00E21602 /* ViewController.swift in Sources */,
 				E3B8FC5C1D00DFF60045672B /* DataController.swift in Sources */,
 				E3B8FC881D01526D0045672B /* TimeRecords.swift in Sources */,
+				B86EC36C1D08D74600F27579 /* RecordViewController.swift in Sources */,
 				E3B8FC8A1D01526D0045672B /* MoveRecords.swift in Sources */,
+				B86EC36E1D08D84000F27579 /* InitialViewController.swift in Sources */,
 				C4905DBD1CE66CFF00E21602 /* AppDelegate.swift in Sources */,
+				B86EC36A1D08D6FC00F27579 /* OptionViewController.swift in Sources */,
 				E3B8FC821D0151E50045672B /* GameDataModel.xcdatamodeld in Sources */,
+				B86EC3681D08D68200F27579 /* InstructionViewViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
