@@ -32,4 +32,11 @@ class OptionViewController: UIViewController {
     }
     */
 
+    @IBAction func cancelButton(sender: AnyObject) {
+    dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    @IBAction func doneButton(sender: AnyObject) {
+    }
 }

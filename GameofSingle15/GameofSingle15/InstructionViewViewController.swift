@@ -31,5 +31,13 @@ class InstructionViewViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+/*
+    @IBAction func doneButton(sender: AnyObject) {
+        navigationController!.popViewControllerAnimated(true)
+    }
+ */
 
+    @IBAction func doneButton(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

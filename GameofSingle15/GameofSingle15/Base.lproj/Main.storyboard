@@ -24,7 +24,7 @@
                                     <rect key="frame" x="120" y="242" width="119" height="30"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="GameSegue" id="1E5-08-J23"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" id="WQ4-Gc-UxR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMe-eP-1V9">
@@ -50,7 +50,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIy-rt-DWD">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="50" y="119" width="258" height="57"/>
@@ -58,7 +58,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lr-sC-To3">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Options"/>
+                                <state key="normal" title="Settings"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="120" y="358" width="119" height="30"/>
                                 </variation>
@@ -215,12 +215,13 @@
                         <viewControllerLayoutGuide type="bottom" id="Qzc-aH-VMh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="f68-eS-LEe">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-55-JZ8">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="73" y="101" width="256" height="21"/>
@@ -230,7 +231,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Instruction" id="lVH-J1-OeN">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Nqz-Kh-cRb"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Nqz-Kh-cRb">
+                                            <connections>
+                                                <action selector="doneButton:" destination="xvc-bm-i1v" id="R5d-Gi-HWd"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -266,12 +271,13 @@
                         <viewControllerLayoutGuide type="bottom" id="A3J-B4-DYo"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ych-cu-lhA">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Difficulty:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAQ-Jg-POW">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="46" y="133" width="125" height="21"/>
@@ -280,7 +286,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Themes:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sT5-k1-zMz">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="46" y="289" width="125" height="21"/>
@@ -295,9 +301,17 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Opo-9H-pdy">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="Options" id="6gC-PC-FKg">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Vik-Y9-0wY"/>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="BVS-b1-4x8"/>
+                                    <navigationItem title="Settings" id="6gC-PC-FKg">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Vik-Y9-0wY">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="Uhi-3E-utP" id="cJe-2D-Tb7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="BVS-b1-4x8">
+                                            <connections>
+                                                <action selector="doneButton:" destination="Uhi-3E-utP" id="f28-os-H9F"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -307,7 +321,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cut Off Time:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gHO-JO-Ig3">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="46" y="420" width="125" height="21"/>
@@ -348,13 +362,18 @@
                         <viewControllerLayoutGuide type="bottom" id="OM0-3C-20f"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="lrY-ui-ITZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Yw-ng-W1a">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Records" id="vgb-Yn-DI8">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="71r-r6-snt"/>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="71r-r6-snt">
+                                            <connections>
+                                                <action selector="doneButton:" destination="Vsd-TK-uIU" id="8fq-1B-Rp0"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">

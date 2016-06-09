@@ -32,4 +32,7 @@ class RecordViewController: UIViewController {
     }
     */
 
+    @IBAction func doneButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
