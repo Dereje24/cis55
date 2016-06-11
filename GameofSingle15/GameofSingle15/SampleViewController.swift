@@ -1,20 +1,25 @@
 //
-//  InitialViewController.swift
+//  SampleViewController.swift
 //  GameofSingle15
 //
-//  Created by Koichi Okada on 6/7/16.
+//  Created by Koichi Okada on 6/10/16.
 //  Copyright © 2016 GregSimons. All rights reserved.
 //
 
 import UIKit
 
-class InitialViewController: UIViewController {
+class SampleViewController: UIViewController {
 
+    var gameObject: GameObject!
+    @IBOutlet var dimensionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "GameOf15-1.png")!)
+        var x = gameObject.dimensionX
+        var y = gameObject.dimensionY
+        self.dimensionLabel.text = (x.description) + " x " + (y.description)
     }
 
     override func didReceiveMemoryWarning() {
@@ -23,6 +28,9 @@ class InitialViewController: UIViewController {
     }
     
 
+    @IBAction func cancelButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 
