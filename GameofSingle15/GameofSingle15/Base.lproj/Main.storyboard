@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="79Q-jb-9va">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="79Q-jb-9va">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -17,73 +17,78 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z97-qq-rRD">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Play Game"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bak" translatesAutoresizingMaskIntoConstraints="NO" id="WZA-Qa-03F" userLabel="backGround">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="120" y="242" width="119" height="30"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="675"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu_Base" translatesAutoresizingMaskIntoConstraints="NO" id="ijT-mX-y68" userLabel="menu">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="131" width="375" height="461"/>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z97-qq-rRD">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Play Game" image="paly"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="87" y="245" width="200" height="60"/>
                                 </variation>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="presentation" id="WQ4-Gc-UxR"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMe-eP-1V9">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMe-eP-1V9">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Instruction"/>
+                                <state key="normal" title="Instruction" image="instruction"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="120" y="302" width="119" height="30"/>
+                                    <rect key="frame" x="87" y="324" width="200" height="60"/>
                                 </variation>
                                 <connections>
                                     <segue destination="xvc-bm-i1v" kind="presentation" identifier="InstructionSegue" id="AYc-LQ-6aY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EX8-Hf-CF0">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lr-sC-To3">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Records"/>
+                                <state key="normal" title="Settings" image="settings"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="120" y="430" width="119" height="30"/>
-                                </variation>
-                                <connections>
-                                    <segue destination="Vsd-TK-uIU" kind="presentation" id="59l-kV-dvH"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DIy-rt-DWD">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="50" y="119" width="258" height="57"/>
-                                </variation>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0lr-sC-To3">
-                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Settings"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="120" y="358" width="119" height="30"/>
+                                    <rect key="frame" x="87" y="410" width="200" height="60"/>
                                 </variation>
                                 <connections>
                                     <segue destination="Uhi-3E-utP" kind="presentation" id="vlq-E7-xpg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EX8-Hf-CF0">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Records" image="records"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="87" y="487" width="200" height="60"/>
+                                </variation>
+                                <connections>
+                                    <segue destination="Vsd-TK-uIU" kind="presentation" id="59l-kV-dvH"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
+                                <exclude reference="WZA-Qa-03F"/>
+                                <exclude reference="ijT-mX-y68"/>
                                 <exclude reference="z97-qq-rRD"/>
                                 <exclude reference="kMe-eP-1V9"/>
-                                <exclude reference="EX8-Hf-CF0"/>
-                                <exclude reference="DIy-rt-DWD"/>
                                 <exclude reference="0lr-sC-To3"/>
+                                <exclude reference="EX8-Hf-CF0"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
+                                <include reference="WZA-Qa-03F"/>
+                                <include reference="ijT-mX-y68"/>
                                 <include reference="z97-qq-rRD"/>
                                 <include reference="kMe-eP-1V9"/>
-                                <include reference="EX8-Hf-CF0"/>
-                                <include reference="DIy-rt-DWD"/>
                                 <include reference="0lr-sC-To3"/>
+                                <include reference="EX8-Hf-CF0"/>
                             </mask>
                         </variation>
                     </view>
@@ -91,7 +96,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhv-d4-H1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="490.5" y="403"/>
+            <point key="canvasLocation" x="489.75" y="402.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -313,7 +318,7 @@
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="Nfc-LC-swu">
                                 <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="25" y="311" width="342" height="31"/>
+                                    <rect key="frame" x="24" y="311" width="344" height="31"/>
                                 </variation>
                                 <connections>
                                     <action selector="sliderChanged:" destination="Uhi-3E-utP" eventType="valueChanged" id="Mnw-EI-f11"/>
@@ -585,6 +590,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="79Q-jb-9va" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vPt-fQ-RuF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -599,4 +605,12 @@
             <point key="canvasLocation" x="-427.5" y="403"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Menu_Base" width="1190" height="1306"/>
+        <image name="bak" width="1820" height="3661"/>
+        <image name="instruction" width="478" height="165"/>
+        <image name="paly" width="478" height="164"/>
+        <image name="records" width="478" height="165"/>
+        <image name="settings" width="478" height="166"/>
+    </resources>
 </document>
