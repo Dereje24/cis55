@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B80DD0141D0BAFEF00443082 /* ButtonTap.wav in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0131D0BAFEF00443082 /* ButtonTap.wav */; };
+		B80DD0161D0BB00B00443082 /* HallOfTheMountainKing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */; };
+		B80DD0181D0BB01E00443082 /* SecondBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0171D0BB01E00443082 /* SecondBeep.wav */; };
 		B86EC3681D08D68200F27579 /* InstructionViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */; };
 		B86EC36A1D08D6FC00F27579 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3691D08D6FC00F27579 /* OptionViewController.swift */; };
 		B86EC36C1D08D74600F27579 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36B1D08D74600F27579 /* RecordViewController.swift */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B80DD0131D0BAFEF00443082 /* ButtonTap.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ButtonTap.wav; sourceTree = "<group>"; };
+		B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HallOfTheMountainKing.mp3; sourceTree = "<group>"; };
+		B80DD0171D0BB01E00443082 /* SecondBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SecondBeep.wav; sourceTree = "<group>"; };
 		B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionViewViewController.swift; sourceTree = "<group>"; };
 		B86EC3691D08D6FC00F27579 /* OptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		B86EC36B1D08D74600F27579 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +62,9 @@
 		C4905DB01CE66CFE00E21602 = {
 			isa = PBXGroup;
 			children = (
+				B80DD0171D0BB01E00443082 /* SecondBeep.wav */,
+				B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */,
+				B80DD0131D0BAFEF00443082 /* ButtonTap.wav */,
 				E3B8FC841D01526D0045672B /* TimeRecords.swift */,
 				E3B8FC861D01526D0045672B /* MoveRecords.swift */,
 				C4905DBB1CE66CFF00E21602 /* GameofSingle15 */,
@@ -149,9 +158,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B80DD0181D0BB01E00443082 /* SecondBeep.wav in Resources */,
 				C4905DC71CE66CFF00E21602 /* LaunchScreen.storyboard in Resources */,
 				C4905DC41CE66CFF00E21602 /* Assets.xcassets in Resources */,
+				B80DD0141D0BAFEF00443082 /* ButtonTap.wav in Resources */,
 				C4905DC21CE66CFF00E21602 /* Main.storyboard in Resources */,
+				B80DD0161D0BB00B00443082 /* HallOfTheMountainKing.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

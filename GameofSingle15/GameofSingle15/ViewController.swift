@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
    
@@ -55,6 +56,29 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     var offsetX0 : Int = 0
     var offsetY0 : Int = 0
     
+    // Sounds
+    var buttonBeep : AVAudioPlayer?
+    var secondBeep : AVAudioPlayer?
+    var backgroundMusic : AVAudioPlayer?
+    
+    func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
+        //1
+        let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
+        let url = NSURL.fileURLWithPath(path!)
+        
+        //2
+        var audioPlayer:AVAudioPlayer?
+        
+        // 3
+        do {
+            try audioPlayer = AVAudioPlayer(contentsOfURL: url)
+        } catch {
+            print("Player not available")
+        }
+        
+        return audioPlayer
+    }
+    
     
     func cellEmpty(y: Int, x: Int)->Bool {
         //accepts any x & y.  Returns true if the cell is in valid range, and if the cell is not occupied with a button
@@ -71,48 +95,127 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     func RandomizeLayout()->Void {
         randomizeIsFinished = false
         
+        //var lastButtonMoved : UIButton? = nil //track last button moved, so we don't move it twice in a row
+        for i in 1...50 {
+            
+            //find the empty cell
+            // (this could be optimzed if needed)
+            var emptyX = -1
+            var emptyY = -1
+            for x in 0..<cols {
+                for y in 0..<rows {
+                    if myBoard[x] [y] == nil {
+                        emptyX = x
+                        emptyY = y
+                    }
+                }
+            }
+            
+            //debug error ck
+            if emptyY == -1 || emptyX == -1 {
+                print("ERROR -- NO EMPTY CELL FOUND iteration \(i) \n")
+            }
+            
+            //now that we know the xy of empty cell, we choose a button in that row or col at random, as follows:
+            // 1. we alternate on row or column
+            // 2. within that row or column, we choose a cell at random, avoiding the empty cell
+            
+            var button : UIButton?
+            if i % 2 == 0 { //alternate row/col
+                //let this be row
+                var randomCol = Int(arc4random()) % (cols-1) //NB:  this yields a random number 1 less than # of cols
+                if randomCol == emptyX {
+                    randomCol = randomCol + 1
+                }
+                button = myBoard[randomCol] [emptyY]
+            } else {
+                //let this be column
+                var randomRow = Int(arc4random()) % (rows-1) //NB:  this yields a random number 1 less than # of rows
+                if randomRow == emptyY {
+                    randomRow = randomRow + 1
+                }
+                button = myBoard[emptyX] [randomRow]
+            }
+            
+            buttonTouched(button)
+            
+            //let button = myBoard[Int(arc4random()) % cols] [Int(arc4random()) % rows]
+//            if button != nil && button != lastButtonMoved { //avoid moving last button back
+//                buttonTouched(button)
+//                if isMoved {  //ck this flag that tells us if a piece was actually moved
+//                    lastButtonMoved = button
+//                }
+//            } else if button != nil {
+//                print("avoided redundant move on iteration \(i) \n")
+//            } else  {
+//                print("avoided nil button on iteration \(i) \n")
+//            }
+        
+        }
+
+        /*
         //go thru every board position, and swap it's tile with another randomly chosen tile
         var timeOfThisAnimation = 0.0
         var timeOfLastAnimation = 0.0
+        let animationSpeed = 0.3    //animation speed coefficient
         for row in (0..<Int(rows)) {
             for col in (0..<cols) {
                 
                 let cga = CGPoint(x:col, y:row) //cell a is col/row
                 let cgb = CGPoint(x:random() % cols, y:random() % rows) //cell b is random
+                let buttonA = myBoard[col][row]
+                let buttonB = myBoard[Int(cgb.x)][Int(cgb.y)]
                 let distance = Double(hypot(cga.x - cgb.x, cga.y - cgb.y))
                 
                 //animate cga to cgb postion
-                if (myBoard[col][row] != nil) {
+                if (buttonA != nil) {
                     let destCenter = CGPointFromArray(cgb)
                     timeOfLastAnimation += timeOfThisAnimation
-                    timeOfThisAnimation = 0.1 * distance
+                    timeOfThisAnimation = animationSpeed * distance
                     
-                    self.view.bringSubviewToFront(myBoard[col][row]!) //BUG:  THIS DOESN'T WORK -- NOT SURE WHY GS 5/25/16
-                    UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveLinear, animations: {self.myBoard[col][row]!.center.x = destCenter.x ; self.myBoard[col][row]!.center.y = destCenter.y }, completion: nil)
+                    //self.view.bringSubviewToFront(buttonA!) //BUG:  THIS DOESN'T WORK -- NOT SURE WHY GS 5/25/16
+                    UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveLinear, animations: {
+                        self.view.bringSubviewToFront(buttonA!);
+                        buttonA!.center.x = destCenter.x ; buttonA!.center.y = destCenter.y },
+                                               completion:
+                        {finished in self.view.sendSubviewToBack(buttonA!) }  )
                 }
                 
                 //...and animate cgb to cga
-                if (myBoard[Int(cgb.x)][Int(cgb.y)] != nil) {
+                if (buttonB != nil) {
                     let destCenter = CGPointFromArray(cga)
 
                     timeOfLastAnimation += timeOfThisAnimation
-                    timeOfThisAnimation = 0.1 * distance
-                    self.view.bringSubviewToFront(myBoard[Int(cgb.x)][Int(cgb.y)]!)
+                    timeOfThisAnimation = animationSpeed * distance
+                    //self.view.bringSubviewToFront(myBoard[Int(cgb.x)][Int(cgb.y)]!)
                     
                     if(row == rows-1 && col == cols-1)
                     {
-                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.x = destCenter.x ; self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.y = destCenter.y }, completion: {finished in self.startTimer()})
+                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {
+                            self.view.bringSubviewToFront(buttonB!) ;
+                            buttonB!.center.x = destCenter.x ;
+                            buttonB!.center.y = destCenter.y
+                            }, completion: {finished in self.startTimer()})
                     }
                     else
                     {
-                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.x = destCenter.x ; self.myBoard[Int(cgb.x)][Int(cgb.y)]!.center.y = destCenter.y }, completion: nil)
+                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {
+                            self.view.bringSubviewToFront(buttonB!) ;
+                            buttonB!.center.x = destCenter.x ;
+                            buttonB!.center.y = destCenter.y },
+                            completion: {finished in self.view.sendSubviewToBack(buttonB!) } )
                     }
                 }
 
-                BoardSwap(cga, b: cgb) //swap them
+                BoardSwap(cga, b: cgb) //swap them in array
             }
         }
+ */
+        
+        startTimerAsLastAnimation() //starts timer after all queued up "randomize" animations finish
     }
+    
+
     
     
     func youWon()->Bool {
@@ -142,7 +245,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             
             self.gameStop()
             
-            let alert = UIAlertController(title: "VICTORY!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "VICTORY!", message:"Play Again?", preferredStyle: .Alert)
+            
+            backgroundMusic?.volume = 0.3 //temporary hack to play music -- will be changed so it is "victory" music and stops when dialog is dismissed
+            backgroundMusic?.play()
+            
             alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
             //attempt to present uialertcontroller which is already presenting!!
@@ -154,7 +261,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     func timeOut(){
         self.gameStop()
         
-        let alert = UIAlertController(title: "TimeOut!", message:"REPLAY THE GAME?", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "Sorry, time is up!", message:"Play Again?", preferredStyle: .Alert)
         alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
         alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame()})
         //attempt to present uialertcontroller which is already presenting!!
@@ -162,7 +269,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     }
     
     func BoardIntegrityCheck()->Bool {
-        /* verify that the location of every board tile button is where it should be */
+        /* verify that the location of every board tile button is where it should be 
+         this is a utility function that should only be needed for debugging  */
         for row in (0..<Int(rows)) {
             for col in (0..<cols) {
                 if let location = myBoard[col][row]?.center {
@@ -175,23 +283,61 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         }
         return true
     }
+    
+    
+    var timeLastAnimationFinishes = 0.0
+    
 
     func moveToEmptyCell(cgFrom: CGPoint, cgTo: CGPoint) {
         // moves board piece at cgFrom to cgTo, updating board data structure and initiating button animcation on screen
         // assumes board[cgTo] is nil
         
+        /* Timing computations:
+         We want animations to happen serially, regardless of whether this is initial "randomization" or normal moves.
+         To make that happen, we track time last animation was supposed to finish, and we make sure this animation doesn't start before that.
+         if timeOfLastAnimation >
+        */
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        var delay : Double
+        if (currentTime > timeLastAnimationFinishes) { //if timeLastAnimationFinishes is in the past, and is irrelevant -- no delay
+            timeLastAnimationFinishes = currentTime
+        }
+        delay = timeLastAnimationFinishes - currentTime //set up to wait until last animation finishes
+        let duration = 0.1
+        timeLastAnimationFinishes = timeLastAnimationFinishes + duration //set it up for next time
+        
         let destCenter = CGPointFromArray(cgTo)
         let button = myBoard[Int(cgFrom.x)][Int(cgFrom.y)]!
         
        //UIView.animateWithDuration(0.5, animations: {sender.center.x = destCenter.x ; sender.center.y = destCenter.y })
-        UIView.animateWithDuration(0.25, delay: 0, options: .CurveLinear, animations: {button.center.x = destCenter.x ; button.center.y = destCenter.y ; self.isMoved = true}, completion: {finished in
+        UIView.animateWithDuration(duration, delay: delay, options: .CurveLinear, animations: {button.center.x = destCenter.x ; button.center.y = destCenter.y ; self.isMoved = true}, completion: {finished in
             if (finished) {
                 self.ckIfYouWon()
             }
         }) //completion
         BoardSwap(cgFrom, b: cgTo) //swap data in the board array (swaps nil for button in this case)
     }
-    
+
+    func   startTimerAsLastAnimation() {
+        //starts timer after any pending animations are done.  This is typically used at the end of the "Randomize" routine which scrambles the tiles at beginning of game.
+        let currentTime = NSDate.timeIntervalSinceReferenceDate()
+        var delay : Double
+        if (currentTime > timeLastAnimationFinishes) { //if timeLastAnimationFinishes is in the past, and is irrelevant -- no delay
+            timeLastAnimationFinishes = currentTime
+        }
+        delay = timeLastAnimationFinishes - currentTime //set up to wait until last animation finishes
+//        UIView.animateWithDuration(0.01, delay: delay, options: .CurveLinear, animations: {self.backgroundView.backgroundColor
+//            = CGColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor}, completion: {finished in self.startTimer()})
+//        print("will start timer in \(delay) seconds \n")
+        
+        
+        // This starts timer after "delay"
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) { () -> Void in
+            self.startTimer()
+        }
+        movesCounter = 0 //reset moves counter (after it got incremented as side effect of randomize)
+    }
+
     func traverseAndMoveAllPossible(cgFrom: CGPoint, cgTo: CGPoint) {
         //given two cgs on same axis, determines if a single or multi tile move is possible along that vector, and makes that(those) move(s)
         //cgFrom is typically the coordinates of point clicked on
@@ -271,8 +417,12 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             traverseAndMoveAllPossible(cga, cgTo: CGPoint(x: CGFloat(cols-1), y: cga.y)) //look from this cell all the way right
         }
         if(isMoved == true){
-            movesCounter+=1 // Move counter + 1 after each move!
-            movesLabel.text = String(movesCounter)
+            buttonBeep?.play() //play move sound
+            
+            if randomizeIsFinished {
+                movesCounter+=1 // Move counter + 1 after each move!
+                movesLabel.text = String(movesCounter)
+            }
         }
     }
     
@@ -298,6 +448,17 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         // Do any additional setup after loading the view, typically from a nib.
         
         updateRecordsOnLabel()
+        
+        //Initialize Sounds
+        if let buttonBeep = self.setupAudioPlayerWithFile("ButtonTap", type:"wav") {
+            self.buttonBeep = buttonBeep
+        }
+        if let secondBeep = self.setupAudioPlayerWithFile("SecondBeep", type:"wav") {
+            self.secondBeep = secondBeep
+        }
+        if let backgroundMusic = self.setupAudioPlayerWithFile("HallOfTheMountainKing", type:"mp3") {
+            self.backgroundMusic = backgroundMusic
+        }
         
         // Init background view
         backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
@@ -377,6 +538,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     
     // This function counts seconds
     func updateCounter() {
+        secondBeep?.play() //play second ticking sound
+        
         timerCounter+=1
         
         let strSeconds = String(format: "%02d", timerCounter % 60)
