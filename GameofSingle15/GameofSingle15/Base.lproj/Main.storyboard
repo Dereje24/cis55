@@ -69,10 +69,10 @@
                                     <segue destination="Vsd-TK-uIU" kind="presentation" id="59l-kV-dvH"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-lz-upy">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title12" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-lz-upy">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="83" y="32" width="204" height="91"/>
+                                    <rect key="frame" x="48" y="32" width="278" height="91"/>
                                 </variation>
                             </imageView>
                         </subviews>
@@ -146,7 +146,7 @@
                                     <rect key="frame" x="20" y="198" width="139" height="45"/>
                                 </variation>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="header1" translatesAutoresizingMaskIntoConstraints="NO" id="lIr-X1-Pza">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title11" translatesAutoresizingMaskIntoConstraints="NO" id="lIr-X1-Pza">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="0.0" y="15" width="375" height="79"/>
@@ -634,14 +634,14 @@
         <image name="Refresh" width="162" height="166"/>
         <image name="backBtn" width="162" height="166"/>
         <image name="bak" width="1080" height="1920"/>
-        <image name="header1" width="1190" height="238"/>
         <image name="instTitle" width="447" height="172"/>
         <image name="instruction" width="478" height="165"/>
         <image name="menuBack" width="904" height="1306"/>
         <image name="paly" width="478" height="164"/>
         <image name="records" width="478" height="165"/>
         <image name="settings" width="478" height="166"/>
-        <image name="title2" width="470" height="188"/>
+        <image name="title11" width="1190" height="238"/>
+        <image name="title12" width="639" height="188"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="WQ4-Gc-UxR"/>
