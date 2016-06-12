@@ -469,11 +469,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         
         // Init background view
         backgroundView.frame = CGRectMake(0, 0, view.frame.width, view.frame.height)
-        backgroundView.image = UIImage(named: "background")
+        backgroundView.image = UIImage(named: "bak")
         self.view.addSubview(backgroundView)
         
         // Init playground view
-        playgroundView.frame = CGRectMake(7, 300, view.frame.width-7, 400)
+        playgroundView.frame = CGRectMake(0, 300, view.frame.width, 400)
         self.backgroundView.addSubview(playgroundView)
         
         // Enable User interactions 
@@ -481,10 +481,14 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         playgroundView.userInteractionEnabled = true
         
         timerLabel.layer.borderWidth  = 2
-        timerLabel.layer.borderColor  = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor
+        timerLabel.layer.borderColor  = UIColor.init(red: 170.0/255.0, green: 49.0/255.0, blue: 80.0/255.0, alpha: 1).CGColor
+        timerLabel.clipsToBounds = true
+        timerLabel.layer.cornerRadius = 10
         
         movesLabel.layer.borderWidth  = 2
-        movesLabel.layer.borderColor  = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1).CGColor
+        movesLabel.layer.borderColor  = UIColor.init(red: 170.0/255.0, green: 49.0/255.0, blue: 80.0/255.0, alpha: 1).CGColor
+        movesLabel.clipsToBounds = true
+        movesLabel.layer.cornerRadius = 10
         
         //Init Globals
         cellWidth = ((Int(screensize.width) - (2 * viewFrameMargin)) / cols) - (2 * cellFrameMargin)
@@ -500,12 +504,13 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
                 if !((row == rows-1) && (col == cols-1)) { //leave last cell empty
                     let button = UIButton(frame: CGRectMake(0,0, CGFloat(cellWidth - (2 * cellFrameMargin)), CGFloat(cellHeight - (2 * cellFrameMargin))))
                     button.center = CGPointFromArray(CGPointMake(CGFloat(col), CGFloat(row)))
-                    button.backgroundColor = UIColor.init(red: 140.0/255.0, green: 0/255.0, blue: 26.0/255.0, alpha: 1)
-                    //button.backgroundColor = UIColor.redColor()//setting backgroundColor
+                    button.backgroundColor = UIColor.init(red: 244.0/255.0, green: 174.0/255.0, blue: 28.0/255.0, alpha: 1)
                     button.setTitle((col + 1 + (row * cols)).description, forState: UIControlState.Normal)
-                    button.layer.cornerRadius = 5
-                    button.layer.borderWidth = 1
-                    button.layer.borderColor = UIColor.whiteColor().CGColor
+                    button.layer.cornerRadius = 12
+                    button.layer.borderWidth = 3
+                    button.layer.borderColor = UIColor.init(red: 170.0/255.0, green: 49.0/255.0, blue: 80.0/255.0, alpha: 1).CGColor
+                    button.titleLabel!.font = UIFont(name: "Chalkboard SE", size: 32)
+                    
                     button.addTarget(self, action: #selector(ViewController.buttonTouched(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                     self.playgroundView.addSubview(button)
                     
@@ -588,6 +593,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     }
     
     // When pause button is clicked, it displays a blurry image view to cover the playground
+    
     @IBAction func pauseGame(sender: AnyObject) {
         
         let cancelPauseBtn = UIButton(type: .Custom) // a cancel button displaying on pausedView
@@ -611,7 +617,9 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         }
     }
     
+    
     @IBAction func refreshTimer(sender: AnyObject) {
+
         if (randomizeIsFinished == true && isPaused == false){
             restartGame()
         }
@@ -688,8 +696,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             let strSeconds = String(format: "%02d", convertedInt % 60)
             let strMinutes = String(format: "%02d", convertedInt / 60)
             
-            showBestMoveLabel.text = "Move Rec: " + String(moveArr[0].iMove)
-            showBestTimeLabel.text = "Time Rec: " + strMinutes + ":" + strSeconds
+            showBestMoveLabel.text = "Moves - " + String(moveArr[0].iMove)
+            showBestTimeLabel.text = "Time - " + strMinutes + ":" + strSeconds
         }
     }
     
