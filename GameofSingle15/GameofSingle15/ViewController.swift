@@ -68,14 +68,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     // var theme: String!
     
     func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
-        //1
         let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
         let url = NSURL.fileURLWithPath(path!)
         
-        //2
         var audioPlayer:AVAudioPlayer?
         
-        // 3
         do {
             try audioPlayer = AVAudioPlayer(contentsOfURL: url)
         } catch {
@@ -144,80 +141,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             }
             
             buttonTouched(button)
-            
-            //let button = myBoard[Int(arc4random()) % cols] [Int(arc4random()) % rows]
-//            if button != nil && button != lastButtonMoved { //avoid moving last button back
-//                buttonTouched(button)
-//                if isMoved {  //ck this flag that tells us if a piece was actually moved
-//                    lastButtonMoved = button
-//                }
-//            } else if button != nil {
-//                print("avoided redundant move on iteration \(i) \n")
-//            } else  {
-//                print("avoided nil button on iteration \(i) \n")
-//            }
-        
         }
-
-        /*
-        //go thru every board position, and swap it's tile with another randomly chosen tile
-        var timeOfThisAnimation = 0.0
-        var timeOfLastAnimation = 0.0
-        let animationSpeed = 0.3    //animation speed coefficient
-        for row in (0..<Int(rows)) {
-            for col in (0..<cols) {
-                
-                let cga = CGPoint(x:col, y:row) //cell a is col/row
-                let cgb = CGPoint(x:random() % cols, y:random() % rows) //cell b is random
-                let buttonA = myBoard[col][row]
-                let buttonB = myBoard[Int(cgb.x)][Int(cgb.y)]
-                let distance = Double(hypot(cga.x - cgb.x, cga.y - cgb.y))
-                
-                //animate cga to cgb postion
-                if (buttonA != nil) {
-                    let destCenter = CGPointFromArray(cgb)
-                    timeOfLastAnimation += timeOfThisAnimation
-                    timeOfThisAnimation = animationSpeed * distance
-                    
-                    //self.view.bringSubviewToFront(buttonA!) //BUG:  THIS DOESN'T WORK -- NOT SURE WHY GS 5/25/16
-                    UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveLinear, animations: {
-                        self.view.bringSubviewToFront(buttonA!);
-                        buttonA!.center.x = destCenter.x ; buttonA!.center.y = destCenter.y },
-                                               completion:
-                        {finished in self.view.sendSubviewToBack(buttonA!) }  )
-                }
-                
-                //...and animate cgb to cga
-                if (buttonB != nil) {
-                    let destCenter = CGPointFromArray(cga)
-
-                    timeOfLastAnimation += timeOfThisAnimation
-                    timeOfThisAnimation = animationSpeed * distance
-                    //self.view.bringSubviewToFront(myBoard[Int(cgb.x)][Int(cgb.y)]!)
-                    
-                    if(row == rows-1 && col == cols-1)
-                    {
-                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {
-                            self.view.bringSubviewToFront(buttonB!) ;
-                            buttonB!.center.x = destCenter.x ;
-                            buttonB!.center.y = destCenter.y
-                            }, completion: {finished in self.startTimer()})
-                    }
-                    else
-                    {
-                        UIView.animateWithDuration(timeOfThisAnimation, delay: timeOfLastAnimation, options: .CurveEaseIn, animations: {
-                            self.view.bringSubviewToFront(buttonB!) ;
-                            buttonB!.center.x = destCenter.x ;
-                            buttonB!.center.y = destCenter.y },
-                            completion: {finished in self.view.sendSubviewToBack(buttonB!) } )
-                    }
-                }
-
-                BoardSwap(cga, b: cgb) //swap them in array
-            }
-        }
- */
-        
         startTimerAsLastAnimation() //starts timer after all queued up "randomize" animations finish
     }
     
@@ -452,6 +376,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // get Game Settings from Settings view
         updateGameSettings()
         
         updateRecordsOnLabel()
@@ -527,10 +453,6 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             myBoard.append(colOfBoard)
         } //for col
         
-        RandomizeLayout()
-        BoardIntegrityCheck()
-        
-        timerLabel.text = startTime
     }
 
     override func didReceiveMemoryWarning() {
@@ -540,6 +462,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        RandomizeLayout()
+        //BoardIntegrityCheck()
+        
+        timerLabel.text = startTime
         
         updateRecordsOnLabel()
     }
