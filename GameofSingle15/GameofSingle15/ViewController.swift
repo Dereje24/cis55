@@ -722,6 +722,11 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             // theme = gameObject.theme
         }
     }
+    
+    
+    @IBAction func goBackBtn(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }
 
 

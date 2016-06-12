@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Game Of Single 15-->
+        <!--Initial View Controller-->
         <scene sceneID="fWd-qR-AbW">
             <objects>
                 <viewController id="iq5-tF-10u" customClass="InitialViewController" customModule="GameofSingle15" customModuleProvider="target" sceneMemberID="viewController">
@@ -69,6 +69,12 @@
                                     <segue destination="Vsd-TK-uIU" kind="presentation" id="59l-kV-dvH"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title2" translatesAutoresizingMaskIntoConstraints="NO" id="Whc-lz-upy">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="83" y="32" width="204" height="91"/>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -79,6 +85,7 @@
                                 <exclude reference="kMe-eP-1V9"/>
                                 <exclude reference="0lr-sC-To3"/>
                                 <exclude reference="EX8-Hf-CF0"/>
+                                <exclude reference="Whc-lz-upy"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -89,10 +96,11 @@
                                 <include reference="kMe-eP-1V9"/>
                                 <include reference="0lr-sC-To3"/>
                                 <include reference="EX8-Hf-CF0"/>
+                                <include reference="Whc-lz-upy"/>
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Game Of Single 15" id="Sf8-lW-7Qm"/>
+                    <navigationItem key="navigationItem" id="Sf8-lW-7Qm"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhv-d4-H1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -150,6 +158,9 @@
                                 <variation key="widthClass=compact" fixedFrame="YES">
                                     <rect key="frame" x="44" y="20" width="50" height="50"/>
                                 </variation>
+                                <connections>
+                                    <action selector="goBackBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8QQ-ms-StZ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IE2-cn-eBG" userLabel="Refresh">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -238,44 +249,66 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="675"/>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How to play" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y6-55-JZ8">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="73" y="101" width="256" height="21"/>
-                                </variation>
-                            </label>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tey-4X-MbG">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="Instruction" id="lVH-J1-OeN">
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="Nqz-Kh-cRb">
-                                            <connections>
-                                                <action selector="doneButton:" destination="xvc-bm-i1v" id="R5d-Gi-HWd"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
+                                    <navigationItem id="lVH-J1-OeN"/>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 </variation>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gQH-7t-Xr6">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Button" image="backBtn"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="20" width="50" height="50"/>
+                                </variation>
+                                <connections>
+                                    <action selector="doneButton:" destination="xvc-bm-i1v" eventType="touchUpInside" id="0cL-8u-ZfU"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuBack" translatesAutoresizingMaskIntoConstraints="NO" id="pLJ-5w-Rvk">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="20" y="125" width="335" height="512"/>
+                                </variation>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="instTitle" translatesAutoresizingMaskIntoConstraints="NO" id="tPY-6u-Tvq">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="95" y="43" width="184" height="74"/>
+                                </variation>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="how to play ?!" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="0fl-5m-aks">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.19215686269999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="39" y="148" width="301" height="465"/>
+                                </variation>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="2RR-Lz-onJ"/>
-                                <exclude reference="6y6-55-JZ8"/>
                                 <exclude reference="Tey-4X-MbG"/>
+                                <exclude reference="gQH-7t-Xr6"/>
+                                <exclude reference="pLJ-5w-Rvk"/>
+                                <exclude reference="tPY-6u-Tvq"/>
+                                <exclude reference="0fl-5m-aks"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="2RR-Lz-onJ"/>
-                                <include reference="6y6-55-JZ8"/>
                                 <include reference="Tey-4X-MbG"/>
+                                <include reference="gQH-7t-Xr6"/>
+                                <include reference="pLJ-5w-Rvk"/>
+                                <include reference="tPY-6u-Tvq"/>
+                                <include reference="0fl-5m-aks"/>
                             </mask>
                         </variation>
                     </view>
@@ -365,27 +398,6 @@
                                     <rect key="frame" x="288" y="291" width="68" height="21"/>
                                 </variation>
                             </label>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Opo-9H-pdy">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Settings" id="6gC-PC-FKg">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Vik-Y9-0wY">
-                                            <connections>
-                                                <action selector="cancelButton:" destination="Uhi-3E-utP" id="cJe-2D-Tb7"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="BVS-b1-4x8">
-                                            <connections>
-                                                <action selector="doneButton:" destination="Uhi-3E-utP" id="f28-os-H9F"/>
-                                                <segue destination="BYZ-38-t0r" kind="show" identifier="settingSegue" id="GGc-3W-xs6"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                                <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                </variation>
-                            </navigationBar>
                             <pickerView multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QnX-dC-lgV">
                                 <rect key="frame" x="0.0" y="-216" width="320" height="216"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
@@ -458,6 +470,27 @@
                                     <rect key="frame" x="298" y="589" width="51" height="31"/>
                                 </variation>
                             </switch>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Opo-9H-pdy">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Settings" id="6gC-PC-FKg">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Vik-Y9-0wY">
+                                            <connections>
+                                                <action selector="cancelButton:" destination="Uhi-3E-utP" id="cJe-2D-Tb7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="BVS-b1-4x8">
+                                            <connections>
+                                                <action selector="doneButton:" destination="Uhi-3E-utP" id="f28-os-H9F"/>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="settingSegue" id="GGc-3W-xs6"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                </variation>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -470,7 +503,6 @@
                                 <exclude reference="Nfc-LC-swu"/>
                                 <exclude reference="aJD-d6-7De"/>
                                 <exclude reference="X9U-Oi-78B"/>
-                                <exclude reference="Opo-9H-pdy"/>
                                 <exclude reference="QnX-dC-lgV"/>
                                 <exclude reference="BmB-4x-EHg"/>
                                 <exclude reference="Ofw-QI-Y7t"/>
@@ -481,6 +513,7 @@
                                 <exclude reference="TWH-xp-xVt"/>
                                 <exclude reference="0VZ-ym-ZKZ"/>
                                 <exclude reference="0ih-FF-4Wv"/>
+                                <exclude reference="Opo-9H-pdy"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -493,7 +526,6 @@
                                 <include reference="Nfc-LC-swu"/>
                                 <include reference="aJD-d6-7De"/>
                                 <include reference="X9U-Oi-78B"/>
-                                <include reference="Opo-9H-pdy"/>
                                 <include reference="QnX-dC-lgV"/>
                                 <include reference="BmB-4x-EHg"/>
                                 <include reference="Ofw-QI-Y7t"/>
@@ -504,6 +536,7 @@
                                 <include reference="TWH-xp-xVt"/>
                                 <include reference="0VZ-ym-ZKZ"/>
                                 <include reference="0ih-FF-4Wv"/>
+                                <include reference="Opo-9H-pdy"/>
                             </mask>
                         </variation>
                     </view>
@@ -552,7 +585,7 @@
                                     </navigationItem>
                                 </items>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 </variation>
                             </navigationBar>
                         </subviews>
@@ -602,12 +635,15 @@
         <image name="backBtn" width="162" height="166"/>
         <image name="bak" width="1080" height="1920"/>
         <image name="header1" width="1190" height="238"/>
+        <image name="instTitle" width="447" height="172"/>
         <image name="instruction" width="478" height="165"/>
+        <image name="menuBack" width="904" height="1306"/>
         <image name="paly" width="478" height="164"/>
         <image name="records" width="478" height="165"/>
         <image name="settings" width="478" height="166"/>
+        <image name="title2" width="470" height="188"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GGc-3W-xs6"/>
+        <segue reference="WQ4-Gc-UxR"/>
     </inferredMetricsTieBreakers>
 </document>

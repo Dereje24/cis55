@@ -36,8 +36,12 @@ class InstructionViewViewController: UIViewController {
         navigationController!.popViewControllerAnimated(true)
     }
  */
+    
 
-    @IBAction func doneButton(sender: UIBarButtonItem) {
+    @IBAction func doneButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
+//    @IBAction func doneButton(sender: UIBarButtonItem) {
+//        dismissViewControllerAnimated(true, completion: nil)
+//    }
 }
