@@ -9,15 +9,18 @@
 import UIKit
 
 class GameObject: NSObject {
-    var dimensionX: Int = 0
-    var dimensionY: Int = 0
-    var gameTime: Int = 0
-    var theme: String = ""
+    var rows: Int = 0       // row number of tiles
+    var cols: Int = 0       // column number of tiles
+    var totalTime: Int = 0  // max time for playing game
+    var sounds: [String: Bool] = [String: Bool]()   // sound configurations
+    // var theme: String = ""
     
-    init(x: Int, y: Int, gameTime: Int, theme: String) {
-        self.dimensionX = x
-        self.dimensionY = y
-        self.gameTime = gameTime
-        self.theme = theme
+    // init(rows: Int, cols: Int, totalTime: Int, theme: String) {
+    init(rows: Int, cols: Int, totalTime: Int, sounds: [String: Bool]) {
+        self.rows = rows
+        self.cols = cols
+        self.totalTime = totalTime
+        self.sounds = sounds
+        // self.theme = theme
     }
 }

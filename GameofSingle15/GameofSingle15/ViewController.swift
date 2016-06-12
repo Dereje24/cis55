@@ -17,13 +17,15 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     @IBOutlet weak var showBestTimeLabel: UILabel! //display best time record
     @IBOutlet weak var showBestMoveLabel: UILabel! // display best move record
     
+    var gameObject: GameObject!     // obtain game settings from Settings view controller
+    
     let backgroundView = UIImageView() // set background view
     let playgroundView = UIImageView() // an image view for playground to add on
     let pausedView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark)) // display a blurry view when paused
     
     let startTime = "00:00"
     let startMove = "0"
-    let totalTime = 3600 // in seconds
+    var totalTime = 3600 // in seconds
     
     var gameTimer = NSTimer() //Declare a timer
     var timerCounter = 0
@@ -44,8 +46,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     
     let viewFrameMargin = 10 //margin around entire edge
     let cellFrameMargin = 2  //margin around each cell
-    let rows  = 4; //4x4 game initially
-    let cols  = 4;
+    var rows  = 4; //4x4 game initially
+    var cols  = 4;
     
     var emptyCellX = 0
     var emptyCellY = 0
@@ -60,6 +62,10 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     var buttonBeep : AVAudioPlayer?
     var secondBeep : AVAudioPlayer?
     var backgroundMusic : AVAudioPlayer?
+    
+    var sounds: [String: Bool] = [String: Bool]()
+    // Theme
+    // var theme: String!
     
     func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer?  {
         //1
@@ -446,6 +452,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        updateGameSettings()
         
         updateRecordsOnLabel()
         
@@ -698,6 +705,15 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     func controllerDidChangeContent(controller: NSFetchedResultsController){
     }
 
+    func updateGameSettings() {
+        if(gameObject != nil) {
+            rows = gameObject.rows
+            cols = gameObject.cols
+            totalTime = Int(gameObject.totalTime) * 60       // in second
+            sounds = gameObject.sounds
+            // theme = gameObject.theme
+        }
+    }
 }
 
 

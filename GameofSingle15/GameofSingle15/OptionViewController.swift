@@ -14,16 +14,28 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet var cutOffTime: UILabel!
     @IBOutlet var sliderX: UISlider!
     
-    var collectionIndex: Int = 0
     
-    let pickerDataSource = [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]]
+    @IBOutlet var soundsSwitch: UISwitch!
+    @IBOutlet var timerSwitch: UISwitch!
+    @IBOutlet var playSwitch: UISwitch!
+    @IBOutlet var conclusionSwitch: UISwitch!
+    @IBOutlet var moveSwitch: UISwitch!
+    
+    // let pickerDataSource = [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]]
+    let pickerDataSource = [["3", "4", "5"], ["3", "4", "5"]]
+    let pickerDefaultValue = 1
     
     let sliderDefaultValue = 10
-    let pickerDefaultValue = 3
+    var sliderIntValue = 0
 
-    let collectionItems: [String] = ["apple", "cherry", "grapes", "mangoes", "orange", "papaya", "peaches", "strawberry", "sugarapple", "watermelon"]
+    var rows: Int = 4
+    var cols: Int = 4
     
-    var dimensions: [String: Int] = [String: Int]()
+    var sounds: [String: Bool] = [String: Bool]()
+    
+    // Collection View Controller for Themes configuration
+    // var collectionIndex: Int = 0
+    // let collectionItems: [String] = ["apple", "cherry", "grapes", "mangoes", "orange", "papaya", "peaches", "strawberry", "sugarapple", "watermelon"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +49,8 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         
         self.sliderX.setValue(Float(self.sliderDefaultValue), animated: true)
         self.cutOffTime.text = sliderDefaultValue.description
+
+        initializeSounds()
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,40 +72,85 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
 
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        print("inComponent: " + component.description)
-        print("Row: " + self.pickerDataSource[component][row])
-        
-        let xy: [String] = ["x", "y"]
-        self.dimensions[xy[component]] = Int(self.pickerDataSource[component][row])
+        self.rows = Int(self.pickerDataSource[0][row])!
+        self.cols = Int(self.pickerDataSource[1][row])!
     }
     
+    // get changed slider data for totalTime
     @IBAction func sliderChanged(sender: UISlider) {
-        let currentValue = Int(sender.value)
-        self.cutOffTime.text = currentValue.description
+        self.sliderIntValue = Int(sender.value)
+        self.cutOffTime.text = self.sliderIntValue.description
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
      
-        if segue.identifier == "doneSegue" {
-            let sampleview = segue.destinationViewController as! SampleViewController
-            if self.dimensions["x"] == nil || self.dimensions["y"] == nil {
-                self.dimensions["x"] = 4
-                self.dimensions["y"] = 4
-            }
-            
-            sampleview.gameObject = GameObject(x: self.dimensions["x"]!, y: self.dimensions["y"]!, gameTime: Int(self.cutOffTime.text!)!, theme: self.collectionItems[self.collectionIndex])
+        if segue.identifier == "settingSegue" {
+            let sampleview = segue.destinationViewController as! ViewController
+
+            getSoundConfiguration()
+
+            // set all setting data in GameObject
+            // pass the data to Main ViewController
+            sampleview.gameObject = GameObject(rows: self.rows, cols: self.cols, totalTime: self.sliderIntValue, sounds: sounds)
         }
     }
 
+    // cancel button action (do nothing)
     @IBAction func cancelButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
 
+    // Sound configurations
+    
+    // initialize sound configurations
+    func initializeSounds() {
+        soundsSwitch.setOn(true, animated: true)
+        moveSwitch.setOn(true, animated: true)
+        conclusionSwitch.setOn(true, animated: true)
+        playSwitch.setOn(true, animated: true)
+        timerSwitch.setOn(true, animated: true)
+        
+        soundsSwitch.addTarget(self, action: #selector(OptionViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+    }
+    
+    // set switch configuration when sounds status is switched
+    func stateChanged(switchState: UISwitch) {
+        if (switchState.on) {
+            moveSwitch.setOn(true, animated: true)
+            conclusionSwitch.setOn(true, animated: true)
+            playSwitch.setOn(true, animated: true)
+            timerSwitch.setOn(true, animated: true)
+            moveSwitch.enabled = true
+            conclusionSwitch.enabled = true
+            playSwitch.enabled = true
+            timerSwitch.enabled = true
+        } else {
+            moveSwitch.setOn(false, animated: true)
+            conclusionSwitch.setOn(false, animated: true)
+            playSwitch.setOn(false, animated: true)
+            timerSwitch.setOn(false, animated: true)
+            moveSwitch.enabled = false
+            conclusionSwitch.enabled = false
+            playSwitch.enabled = false
+            timerSwitch.enabled = false
+        }
+    }
+    
+    // get current sound configurations
+    func getSoundConfiguration() {
+        sounds["sounds"] = soundsSwitch.on
+        sounds["move"] = moveSwitch.on
+        sounds["gameconclusion"] = conclusionSwitch.on
+        sounds["gameplay"] = playSwitch.on
+        sounds["timer"] = timerSwitch.on
+    }
+
+    /*
+    // Collection View for Themes configuration
+     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell:CustomCell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CustomCell
         // cell.lblSample.text = "Label\(indexPath.row)"
@@ -116,4 +175,5 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             self.collectionIndex = indexPath.row
             print("Selected Item: \(self.collectionItems[indexPath.row])")
     }
+    */
 }
