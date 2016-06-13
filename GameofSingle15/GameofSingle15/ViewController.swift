@@ -384,27 +384,35 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         updateRecordsOnLabel()
         
         //Initialize Sounds
-        self.sounds = gameObject.sounds
+        //if(gameObject != nil) {
+        //    self.sounds = gameObject.sounds
+        //}
         
         if let buttonBeep = self.setupAudioPlayerWithFile("ButtonTap", type:"wav") {
             self.buttonBeep = buttonBeep
         }
-        if((sounds["sounds"]) == false || (self.sounds["move"]) == false) {
-            self.buttonBeep!.volume = 0
+        if(sounds.isEmpty == false) {
+            if((sounds["sounds"]) == false || (self.sounds["move"]) == false) {
+                self.buttonBeep!.volume = 0
+            }
         }
 
         if let secondBeep = self.setupAudioPlayerWithFile("SecondBeep", type:"wav") {
             self.secondBeep = secondBeep
         }
-        if((sounds["sounds"]) == false || (self.sounds["timer"]) == false) {
+        if(sounds.isEmpty == false) {
+            if((sounds["sounds"]) == false || (self.sounds["timer"]) == false) {
                 self.secondBeep!.volume = 0
+            }
         }
 
         if let backgroundMusic = self.setupAudioPlayerWithFile("HallOfTheMountainKing", type:"mp3") {
             self.backgroundMusic = backgroundMusic
         }
-        if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
-            self.backgroundMusic!.volume = 0
+        if(sounds.isEmpty == false) {
+            if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
+                self.backgroundMusic!.volume = 0
+            }
         }
         
         // Init background view
