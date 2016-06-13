@@ -384,10 +384,6 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         updateRecordsOnLabel()
         
         //Initialize Sounds
-        //if(gameObject != nil) {
-        //    self.sounds = gameObject.sounds
-        //}
-        
         if let buttonBeep = self.setupAudioPlayerWithFile("ButtonTap", type:"wav") {
             self.buttonBeep = buttonBeep
         }
