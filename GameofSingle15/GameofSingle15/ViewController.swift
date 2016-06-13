@@ -546,9 +546,13 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         if(randomizeIsFinished == true && isPaused == false){
             gameStop()
             
-            // Create blur view 
-            pausedView.frame = CGRectMake(0, 0, playgroundView.frame.width, playgroundView.frame.height)
+            // Create blur view
+            pausedView.frame = CGRectMake(0 - playgroundView.frame.width, 0, playgroundView.frame.width, playgroundView.frame.height)
             playgroundView.addSubview(pausedView)
+            
+            UIView.animateWithDuration(1, animations: {
+                self.pausedView.frame = CGRectMake(0, 0, self.playgroundView.frame.width, self.playgroundView.frame.height)
+            })
             
             // Create the cancel button
             cancelPauseBtn.frame = CGRectMake(pausedView.frame.width - 60, 0, 60, 60)
