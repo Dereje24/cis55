@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
-class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate {
+
+class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate, UITableViewDataSource, UITableViewDelegate {
+
+    @IBOutlet var tableView: UITableView!
     
     let moc = DataController().managedObjectContext // instance of our managedObjectContext
     var frcMove : NSFetchedResultsController!
@@ -21,25 +24,37 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        updateRecordsOnLabel()
+
+        // Display applicable data in CoreData
+        //updateRecordsOnLabel()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    // Configure Table View
     
-
+    // Set number of section
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        //return tableDatas.count
+        return 1
+    }
+    
     /*
-    // MARK: - Navigation
+     // Called this delegate method when a Cell is tapped
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print("Num: \(indexPath.row)")
+        print("Value: \(myItems[indexPath.row])\t\(myItems2[indexPath.row])")
     }
     */
+
+    // Return total number of cells, when called this datasource method
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return moveArr.count
+    }
 
     @IBAction func doneButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -81,6 +96,7 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
     }
 
+    /*
     func updateRecordsOnLabel(){
         
         if(!fetch()){
@@ -100,4 +116,30 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
             print("Time Rec: " + strMinutes + ":" + strSeconds)
         }
     }
+    */
+
+
+    // Set values in a Cell, when called this datasource method.
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+        // Get reusable Cell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RecordCell", forIndexPath: indexPath) as! RecordTableViewCell
+        // let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "RecordCell") as! RecordTableViewCell
+        
+        if(!fetch()) {
+            // Set values to a Cell
+            let convertedInt = timeArr[indexPath.row].iTime.integerValue
+            let strSeconds = String(format: "%02d", convertedInt % 60)
+            let strMinutes = String(format: "%02d", convertedInt / 60)
+        
+            cell.iTime!.text = strMinutes + ":" + strSeconds
+            cell.iMove!.text = String(moveArr[indexPath.row].iMove)
+        } else {
+            cell.iTime!.text = "No Record Yet"
+            cell.iMove!.text = ""
+        }
+    
+        return cell
+    }
+
 }

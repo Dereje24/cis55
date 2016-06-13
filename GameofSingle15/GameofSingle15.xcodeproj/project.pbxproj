@@ -11,6 +11,7 @@
 		B80DD0161D0BB00B00443082 /* HallOfTheMountainKing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */; };
 		B80DD0181D0BB01E00443082 /* SecondBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0171D0BB01E00443082 /* SecondBeep.wav */; };
 		B80DD01A1D0BC74100443082 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD0191D0BC74100443082 /* CustomCell.swift */; };
+		B83074F61D0E2A78002E0D41 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83074F51D0E2A78002E0D41 /* RecordTableViewCell.swift */; };
 		B86EC3681D08D68200F27579 /* InstructionViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */; };
 		B86EC36A1D08D6FC00F27579 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3691D08D6FC00F27579 /* OptionViewController.swift */; };
 		B86EC36C1D08D74600F27579 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36B1D08D74600F27579 /* RecordViewController.swift */; };
@@ -32,6 +33,7 @@
 		B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HallOfTheMountainKing.mp3; sourceTree = "<group>"; };
 		B80DD0171D0BB01E00443082 /* SecondBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SecondBeep.wav; sourceTree = "<group>"; };
 		B80DD0191D0BC74100443082 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		B83074F51D0E2A78002E0D41 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionViewViewController.swift; sourceTree = "<group>"; };
 		B86EC3691D08D6FC00F27579 /* OptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		B86EC36B1D08D74600F27579 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 				B86EC36F1D08DAC600F27579 /* GameObject.swift */,
 				B86EC36D1D08D84000F27579 /* InitialViewController.swift */,
 				B86EC36B1D08D74600F27579 /* RecordViewController.swift */,
+				B83074F51D0E2A78002E0D41 /* RecordTableViewCell.swift */,
 				B86EC3691D08D6FC00F27579 /* OptionViewController.swift */,
 				C4905DC31CE66CFF00E21602 /* Assets.xcassets */,
 				C4905DC51CE66CFF00E21602 /* LaunchScreen.storyboard */,
@@ -181,6 +184,7 @@
 				C4905DBF1CE66CFF00E21602 /* ViewController.swift in Sources */,
 				E3B8FC5C1D00DFF60045672B /* DataController.swift in Sources */,
 				E3B8FC881D01526D0045672B /* TimeRecords.swift in Sources */,
+				B83074F61D0E2A78002E0D41 /* RecordTableViewCell.swift in Sources */,
 				B86EC36C1D08D74600F27579 /* RecordViewController.swift in Sources */,
 				E3B8FC8A1D01526D0045672B /* MoveRecords.swift in Sources */,
 				B86EC36E1D08D84000F27579 /* InitialViewController.swift in Sources */,
