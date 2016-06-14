@@ -23,11 +23,15 @@ class InitialViewController: UIViewController {
         // Do any additional setup after loading the view.
         bounceEffect()
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        bounceEffect()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-        bounceEffect()
     }
     
     func bounceEffect(){
@@ -48,10 +52,7 @@ class InitialViewController: UIViewController {
                                     self.setBtn.transform = CGAffineTransformIdentity
                                     self.recBtn.transform = CGAffineTransformIdentity
             }, completion: nil)
-        
     }
-
-    
 
     /*
     // MARK: - Navigation
