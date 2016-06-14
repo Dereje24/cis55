@@ -673,9 +673,9 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     }
     
     
-    @IBAction func goBackBtn(sender: AnyObject) {
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+//    @IBAction func goBackBtn(sender: AnyObject) {
+//        dismissViewControllerAnimated(true, completion: nil)
+//    }
 }
 
 

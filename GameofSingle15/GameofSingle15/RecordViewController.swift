@@ -57,6 +57,7 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
     }
 
     @IBAction func doneButton(sender: AnyObject) {
+    
         dismissViewControllerAnimated(true, completion: nil)
     }
 

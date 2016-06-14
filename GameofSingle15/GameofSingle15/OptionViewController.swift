@@ -98,7 +98,6 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         }
     }
 
-    // cancel button action (do nothing)
     @IBAction func cancelButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
