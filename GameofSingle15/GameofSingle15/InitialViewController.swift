@@ -35,15 +35,15 @@ class InitialViewController: UIViewController {
     }
     
     func bounceEffect(){
-        playBtn.transform = CGAffineTransformMakeScale(0.9, 0.9)
-        instruBtn.transform = CGAffineTransformMakeScale(0.9, 0.9)
-        setBtn.transform = CGAffineTransformMakeScale(0.9, 0.9)
-        recBtn.transform = CGAffineTransformMakeScale(0.9, 0.9)
+        playBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
+        instruBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
+        setBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
+        recBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
         
-        UIView.animateWithDuration(4.0,
-                                   delay: 0,
-                                   usingSpringWithDamping: 0.2,
-                                   initialSpringVelocity: 5.0,
+        UIView.animateWithDuration(5.0,
+                                   delay: 1,
+                                   usingSpringWithDamping: 0.1,
+                                   initialSpringVelocity: 6.0,
                                    options: UIViewAnimationOptions.AllowUserInteraction,
                                    animations: {
                                     self.playBtn.transform = CGAffineTransformIdentity
