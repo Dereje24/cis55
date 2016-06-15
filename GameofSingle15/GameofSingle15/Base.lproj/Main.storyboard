@@ -75,6 +75,12 @@
                                     <rect key="frame" x="48" y="41" width="278" height="59"/>
                                 </variation>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="v1" translatesAutoresizingMaskIntoConstraints="NO" id="A5N-mC-PiI">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="262" y="85" width="74" height="44"/>
+                                </variation>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
@@ -86,6 +92,7 @@
                                 <exclude reference="0lr-sC-To3"/>
                                 <exclude reference="EX8-Hf-CF0"/>
                                 <exclude reference="Whc-lz-upy"/>
+                                <exclude reference="A5N-mC-PiI"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -97,6 +104,7 @@
                                 <include reference="0lr-sC-To3"/>
                                 <include reference="EX8-Hf-CF0"/>
                                 <include reference="Whc-lz-upy"/>
+                                <include reference="A5N-mC-PiI"/>
                             </mask>
                         </variation>
                     </view>
@@ -670,6 +678,7 @@
         <image name="settingsTitle" width="375" height="179"/>
         <image name="title11" width="1190" height="238"/>
         <image name="title12" width="825" height="166"/>
+        <image name="v1" width="388" height="238"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TH8-Xe-C9O"/>

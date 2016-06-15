@@ -35,23 +35,22 @@ class InitialViewController: UIViewController {
     }
     
     func bounceEffect(){
-        playBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
-        instruBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
-        setBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
-        recBtn.transform = CGAffineTransformMakeScale(0.95, 0.95)
+        playBtn.transform = CGAffineTransformMakeScale(0.98, 0.98)
+        instruBtn.transform = CGAffineTransformMakeScale(0.98, 0.98)
+        setBtn.transform = CGAffineTransformMakeScale(0.98, 0.98)
+        recBtn.transform = CGAffineTransformMakeScale(0.98, 0.98)
         
         UIView.animateWithDuration(5.0,
-                                   delay: 1,
+                                   delay: 0,
                                    usingSpringWithDamping: 0.1,
-                                   initialSpringVelocity: 6.0,
+                                   initialSpringVelocity: 7.0,
                                    options: UIViewAnimationOptions.AllowUserInteraction,
                                    animations: {
                                     self.playBtn.transform = CGAffineTransformIdentity
-                                    //self.playBtn.frame = CGRectMake( 87, 245, 200, 60)
                                     self.instruBtn.transform = CGAffineTransformIdentity
                                     self.setBtn.transform = CGAffineTransformIdentity
                                     self.recBtn.transform = CGAffineTransformIdentity
-            }, completion: nil)
+            }, completion: {finished in self.bounceEffect()})
     }
 
     /*
