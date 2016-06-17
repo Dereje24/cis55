@@ -11,19 +11,19 @@
 		B80DD0161D0BB00B00443082 /* HallOfTheMountainKing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */; };
 		B80DD0181D0BB01E00443082 /* SecondBeep.wav in Resources */ = {isa = PBXBuildFile; fileRef = B80DD0171D0BB01E00443082 /* SecondBeep.wav */; };
 		B80DD01A1D0BC74100443082 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B80DD0191D0BC74100443082 /* CustomCell.swift */; };
+		B821CE281D1473E300697800 /* applause_y.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE211D1473E300697800 /* applause_y.wav */; };
+		B821CE291D1473E300697800 /* applause3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE221D1473E300697800 /* applause3.wav */; };
+		B821CE2A1D1473E300697800 /* cheering.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE231D1473E300697800 /* cheering.wav */; };
+		B821CE2B1D1473E300697800 /* click_x.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE241D1473E300697800 /* click_x.wav */; };
+		B821CE2C1D1473E300697800 /* dubreakfiller-rwrk.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE251D1473E300697800 /* dubreakfiller-rwrk.wav */; };
+		B821CE2D1D1473E300697800 /* trumpet_x.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE261D1473E300697800 /* trumpet_x.wav */; };
+		B821CE2E1D1473E300697800 /* whoosh-swish-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = B821CE271D1473E300697800 /* whoosh-swish-02.wav */; };
 		B83074F61D0E2A78002E0D41 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83074F51D0E2A78002E0D41 /* RecordTableViewCell.swift */; };
 		B86EC3681D08D68200F27579 /* InstructionViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */; };
 		B86EC36A1D08D6FC00F27579 /* OptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC3691D08D6FC00F27579 /* OptionViewController.swift */; };
 		B86EC36C1D08D74600F27579 /* RecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36B1D08D74600F27579 /* RecordViewController.swift */; };
 		B86EC36E1D08D84000F27579 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36D1D08D84000F27579 /* InitialViewController.swift */; };
 		B86EC3701D08DAC600F27579 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = B86EC36F1D08DAC600F27579 /* GameObject.swift */; };
-		B87FA3931D13C83500803615 /* applause_y.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA3921D13C83500803615 /* applause_y.wav */; };
-		B87FA3951D13C84900803615 /* applause3.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA3941D13C84900803615 /* applause3.wav */; };
-		B87FA3971D13C86000803615 /* cheering.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA3961D13C86000803615 /* cheering.wav */; };
-		B87FA3991D13C87000803615 /* click_x.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA3981D13C87000803615 /* click_x.wav */; };
-		B87FA39B1D13C88400803615 /* dubreakfiller-rwrk.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA39A1D13C88400803615 /* dubreakfiller-rwrk.wav */; };
-		B87FA39D1D13C8A300803615 /* trumpet_x.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA39C1D13C8A300803615 /* trumpet_x.wav */; };
-		B87FA39F1D13C8B100803615 /* whoosh-swish-02.wav in Resources */ = {isa = PBXBuildFile; fileRef = B87FA39E1D13C8B100803615 /* whoosh-swish-02.wav */; };
 		C4905DBD1CE66CFF00E21602 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4905DBC1CE66CFF00E21602 /* AppDelegate.swift */; };
 		C4905DBF1CE66CFF00E21602 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4905DBE1CE66CFF00E21602 /* ViewController.swift */; };
 		C4905DC21CE66CFF00E21602 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4905DC01CE66CFF00E21602 /* Main.storyboard */; };
@@ -40,19 +40,19 @@
 		B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = HallOfTheMountainKing.mp3; sourceTree = "<group>"; };
 		B80DD0171D0BB01E00443082 /* SecondBeep.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = SecondBeep.wav; sourceTree = "<group>"; };
 		B80DD0191D0BC74100443082 /* CustomCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		B821CE211D1473E300697800 /* applause_y.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = applause_y.wav; sourceTree = "<group>"; };
+		B821CE221D1473E300697800 /* applause3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = applause3.wav; sourceTree = "<group>"; };
+		B821CE231D1473E300697800 /* cheering.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = cheering.wav; sourceTree = "<group>"; };
+		B821CE241D1473E300697800 /* click_x.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click_x.wav; sourceTree = "<group>"; };
+		B821CE251D1473E300697800 /* dubreakfiller-rwrk.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "dubreakfiller-rwrk.wav"; sourceTree = "<group>"; };
+		B821CE261D1473E300697800 /* trumpet_x.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = trumpet_x.wav; sourceTree = "<group>"; };
+		B821CE271D1473E300697800 /* whoosh-swish-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "whoosh-swish-02.wav"; sourceTree = "<group>"; };
 		B83074F51D0E2A78002E0D41 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		B86EC3671D08D68200F27579 /* InstructionViewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionViewViewController.swift; sourceTree = "<group>"; };
 		B86EC3691D08D6FC00F27579 /* OptionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionViewController.swift; sourceTree = "<group>"; };
 		B86EC36B1D08D74600F27579 /* RecordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordViewController.swift; sourceTree = "<group>"; };
 		B86EC36D1D08D84000F27579 /* InitialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
 		B86EC36F1D08DAC600F27579 /* GameObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
-		B87FA3921D13C83500803615 /* applause_y.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = applause_y.wav; path = ../../../github3/GameofSingle15/applause_y.wav; sourceTree = "<group>"; };
-		B87FA3941D13C84900803615 /* applause3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = applause3.wav; path = ../../../github3/GameofSingle15/applause3.wav; sourceTree = "<group>"; };
-		B87FA3961D13C86000803615 /* cheering.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cheering.wav; path = ../../../github3/GameofSingle15/cheering.wav; sourceTree = "<group>"; };
-		B87FA3981D13C87000803615 /* click_x.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = click_x.wav; path = ../../../github3/GameofSingle15/click_x.wav; sourceTree = "<group>"; };
-		B87FA39A1D13C88400803615 /* dubreakfiller-rwrk.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "dubreakfiller-rwrk.wav"; path = "../../../github3/GameofSingle15/dubreakfiller-rwrk.wav"; sourceTree = "<group>"; };
-		B87FA39C1D13C8A300803615 /* trumpet_x.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = trumpet_x.wav; path = ../../../github3/GameofSingle15/trumpet_x.wav; sourceTree = "<group>"; };
-		B87FA39E1D13C8B100803615 /* whoosh-swish-02.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "whoosh-swish-02.wav"; path = "../../../github3/GameofSingle15/whoosh-swish-02.wav"; sourceTree = "<group>"; };
 		C4905DB91CE66CFF00E21602 /* GameofSingle15.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameofSingle15.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4905DBC1CE66CFF00E21602 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4905DBE1CE66CFF00E21602 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,13 +80,13 @@
 		C4905DB01CE66CFE00E21602 = {
 			isa = PBXGroup;
 			children = (
-				B87FA39E1D13C8B100803615 /* whoosh-swish-02.wav */,
-				B87FA39C1D13C8A300803615 /* trumpet_x.wav */,
-				B87FA39A1D13C88400803615 /* dubreakfiller-rwrk.wav */,
-				B87FA3981D13C87000803615 /* click_x.wav */,
-				B87FA3961D13C86000803615 /* cheering.wav */,
-				B87FA3941D13C84900803615 /* applause3.wav */,
-				B87FA3921D13C83500803615 /* applause_y.wav */,
+				B821CE211D1473E300697800 /* applause_y.wav */,
+				B821CE221D1473E300697800 /* applause3.wav */,
+				B821CE231D1473E300697800 /* cheering.wav */,
+				B821CE241D1473E300697800 /* click_x.wav */,
+				B821CE251D1473E300697800 /* dubreakfiller-rwrk.wav */,
+				B821CE261D1473E300697800 /* trumpet_x.wav */,
+				B821CE271D1473E300697800 /* whoosh-swish-02.wav */,
 				B80DD0171D0BB01E00443082 /* SecondBeep.wav */,
 				B80DD0151D0BB00B00443082 /* HallOfTheMountainKing.mp3 */,
 				B80DD0131D0BAFEF00443082 /* ButtonTap.wav */,
@@ -186,18 +186,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				B80DD0181D0BB01E00443082 /* SecondBeep.wav in Resources */,
-				B87FA39D1D13C8A300803615 /* trumpet_x.wav in Resources */,
+				B821CE2D1D1473E300697800 /* trumpet_x.wav in Resources */,
 				C4905DC71CE66CFF00E21602 /* LaunchScreen.storyboard in Resources */,
-				B87FA39B1D13C88400803615 /* dubreakfiller-rwrk.wav in Resources */,
+				B821CE2C1D1473E300697800 /* dubreakfiller-rwrk.wav in Resources */,
 				C4905DC41CE66CFF00E21602 /* Assets.xcassets in Resources */,
 				B80DD0141D0BAFEF00443082 /* ButtonTap.wav in Resources */,
 				C4905DC21CE66CFF00E21602 /* Main.storyboard in Resources */,
-				B87FA39F1D13C8B100803615 /* whoosh-swish-02.wav in Resources */,
+				B821CE2E1D1473E300697800 /* whoosh-swish-02.wav in Resources */,
 				B80DD0161D0BB00B00443082 /* HallOfTheMountainKing.mp3 in Resources */,
-				B87FA3971D13C86000803615 /* cheering.wav in Resources */,
-				B87FA3931D13C83500803615 /* applause_y.wav in Resources */,
-				B87FA3991D13C87000803615 /* click_x.wav in Resources */,
-				B87FA3951D13C84900803615 /* applause3.wav in Resources */,
+				B821CE2A1D1473E300697800 /* cheering.wav in Resources */,
+				B821CE281D1473E300697800 /* applause_y.wav in Resources */,
+				B821CE2B1D1473E300697800 /* click_x.wav in Resources */,
+				B821CE291D1473E300697800 /* applause3.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
