@@ -48,7 +48,8 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
 
     // Return total number of cells, when called this datasource method
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return moveArr.count
+        // limit the number of cell to 10. More than 10 data is not displayed.
+        return moveArr.isEmpty || moveArr.count <= 10 ? moveArr.count : 10
     }
 
     @IBAction func doneButton(sender: AnyObject) {
@@ -99,6 +100,8 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
             alert.show()
         }
     }
+
+
 
     // Set values in a Cell, when called this datasource method.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
