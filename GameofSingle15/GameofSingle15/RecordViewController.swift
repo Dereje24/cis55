@@ -27,9 +27,8 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
-
+        
         // Display applicable data in CoreData
-        //updateRecordsOnLabel()
         fetchRecords()
 
     }
