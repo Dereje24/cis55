@@ -21,8 +21,7 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet var conclusionSwitch: UISwitch!
     @IBOutlet var moveSwitch: UISwitch!
     
-    // let pickerDataSource = [["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"], ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]]
-    let pickerDataSource = [["3", "4", "5"], ["3", "4", "5"]]
+    let pickerDataSource = ["Easy(3x3)", "Medium(Default 4x4)", "Hard(5x5)"]
     let pickerDefaultValue = 1
     
     let sliderDefaultValue = 10
@@ -33,9 +32,6 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     var sounds: [String: Bool] = [String: Bool]()
     
-    // Collection View Controller for Themes configuration
-    // var collectionIndex: Int = 0
-    // let collectionItems: [String] = ["apple", "cherry", "grapes", "mangoes", "orange", "papaya", "peaches", "strawberry", "sugarapple", "watermelon"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,10 +39,9 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         // Do any additional setup after loading the view.
         self.pickerX.dataSource = self
         self.pickerX.delegate = self
-        // Set default values for horizontal and vertical
+        // Set default values for picker
         self.pickerX.selectRow(self.pickerDefaultValue, inComponent: 0, animated: true)
-        self.pickerX.selectRow(self.pickerDefaultValue, inComponent: 1, animated: true)
-        
+
         self.sliderX.setValue(Float(self.sliderDefaultValue), animated: true)
         self.cutOffTime.text = sliderDefaultValue.description
 
@@ -59,23 +54,33 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 2
+        return 1
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return pickerDataSource[0].count;
+        return pickerDataSource.count;
     }
-    
+    /*
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.pickerDataSource[component][row]
+        return self.pickerDataSource[row]
     }
-
+    */
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int)
     {
-        self.rows = Int(self.pickerDataSource[0][row])!
-        self.cols = Int(self.pickerDataSource[1][row])!
+        self.rows = row + 3
+        self.cols = self.rows
     }
-    
+
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        let pickerLabel = UILabel()
+        pickerLabel.textColor = UIColor.blackColor()
+        pickerLabel.text = self.pickerDataSource[row]
+        pickerLabel.font = UIFont(name: (pickerLabel.font?.fontName)!, size: 17)
+        //pickerLabel.font = UIFont(name: "System", size: 14) // In this use your custom font
+        pickerLabel.textAlignment = NSTextAlignment.Left
+        return pickerLabel
+    }
+
     // get changed slider data for totalTime
     @IBAction func sliderChanged(sender: UISlider) {
         self.sliderIntValue = Int(sender.value)
@@ -146,33 +151,4 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         sounds["gameplay"] = playSwitch.on
         sounds["timer"] = timerSwitch.on
     }
-
-    /*
-    // Collection View for Themes configuration
-     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell:CustomCell = collectionView.dequeueReusableCellWithReuseIdentifier("cell", forIndexPath: indexPath) as! CustomCell
-        // cell.lblSample.text = "Label\(indexPath.row)"
-        cell.imageItem.image = UIImage(named: self.collectionItems[indexPath.row])
-
-        return cell
-    }
-        
-    // Section number
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-        return 1
-    }
-        
-    // Number of cells to be displayed
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            return self.collectionItems.count
-    }
-        
-    // Called when a collection Cell is tapped
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-            print("Selected Index: \(indexPath.row)")
-            self.collectionIndex = indexPath.row
-            print("Selected Item: \(self.collectionItems[indexPath.row])")
-    }
-    */
 }

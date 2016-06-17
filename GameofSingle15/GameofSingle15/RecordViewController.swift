@@ -19,14 +19,19 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
     var frcTime : NSFetchedResultsController!
     var moveArr = [MoveRecords]() // Declare an array to store move records
     var timeArr = [TimeRecords]() // Declare an array to store time records
+    var rankingCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        tableView.dataSource = self
+        tableView.delegate = self
 
         // Display applicable data in CoreData
         //updateRecordsOnLabel()
+        fetchRecords()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,15 +46,6 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
         //return tableDatas.count
         return 1
     }
-    
-    /*
-     // Called this delegate method when a Cell is tapped
-
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Num: \(indexPath.row)")
-        print("Value: \(myItems[indexPath.row])\t\(myItems2[indexPath.row])")
-    }
-    */
 
     // Return total number of cells, when called this datasource method
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +59,8 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
 
     // Func to fetch the records in CoreData
     func fetch()->Bool{
-        
+        rankingCount = 0;
+
         let frMove = NSFetchRequest(entityName: "MoveRecords")
         let sdMove = NSSortDescriptor(key: "iMove", ascending: true)
         frMove.sortDescriptors = [sdMove]
@@ -97,50 +94,54 @@ class RecordViewController: UIViewController, NSFetchedResultsControllerDelegate
         }
     }
 
-    /*
-    func updateRecordsOnLabel(){
-        
-        if(!fetch()){
-            // showBestMoveLabel.text = "No Record Yet"
-            // showBestTimeLabel.text = "No Record Yet"
-            print("No Record Yet")
-        }
-        else{
-            let convertedInt = timeArr[0].iTime.integerValue
-            
-            let strSeconds = String(format: "%02d", convertedInt % 60)
-            let strMinutes = String(format: "%02d", convertedInt / 60)
-            
-            // showBestMoveLabel.text = "Move Rec: " + String(moveArr[0].iMove)
-            // showBestTimeLabel.text = "Time Rec: " + strMinutes + ":" + strSeconds
-            print("Move Rec: " + String(moveArr[0].iMove))
-            print("Time Rec: " + strMinutes + ":" + strSeconds)
+    func fetchRecords() {
+        if(!fetch()) {
+            let alert = UIAlertView(title: "No Record Yet", message: "", delegate: nil, cancelButtonTitle: "OK")
+            alert.show()
         }
     }
-    */
-
 
     // Set values in a Cell, when called this datasource method.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
         // Get reusable Cell
-        let cell = tableView.dequeueReusableCellWithIdentifier("RecordCell", forIndexPath: indexPath) as! RecordTableViewCell
-        // let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "RecordCell") as! RecordTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("recordCell", forIndexPath: indexPath) as! RecordTableViewCell
         
-        if(!fetch()) {
+        if rankingCount <= 9 {
             // Set values to a Cell
             let convertedInt = timeArr[indexPath.row].iTime.integerValue
             let strSeconds = String(format: "%02d", convertedInt % 60)
             let strMinutes = String(format: "%02d", convertedInt / 60)
         
+            cell.iRanking!.text = String(rankingCount + 1) + ". "
             cell.iTime!.text = strMinutes + ":" + strSeconds
             cell.iMove!.text = String(moveArr[indexPath.row].iMove)
-        } else {
-            cell.iTime!.text = "No Record Yet"
-            cell.iMove!.text = ""
+            
+            rankingCount += 1
         }
-    
+        
         return cell
     }
 
+    /*
+     func updateRecordsOnLabel(){
+     
+     if(!fetch()){
+     // showBestMoveLabel.text = "No Record Yet"
+     // showBestTimeLabel.text = "No Record Yet"
+     print("No Record Yet")
+     }
+     else{
+     let convertedInt = timeArr[0].iTime.integerValue
+     
+     let strSeconds = String(format: "%02d", convertedInt % 60)
+     let strMinutes = String(format: "%02d", convertedInt / 60)
+     
+     // showBestMoveLabel.text = "Move Rec: " + String(moveArr[0].iMove)
+     // showBestTimeLabel.text = "Time Rec: " + strMinutes + ":" + strSeconds
+     print("Move Rec: " + String(moveArr[0].iMove))
+     print("Time Rec: " + strMinutes + ":" + strSeconds)
+     }
+     }
+     */
 }

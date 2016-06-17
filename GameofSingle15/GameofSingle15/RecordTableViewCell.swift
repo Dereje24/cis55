@@ -12,6 +12,7 @@ class RecordTableViewCell: UITableViewCell {
 
     @IBOutlet var iTime: UILabel!
     @IBOutlet var iMove: UILabel!
+    @IBOutlet var iRanking: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
