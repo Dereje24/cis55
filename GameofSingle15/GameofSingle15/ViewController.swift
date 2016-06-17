@@ -458,7 +458,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             self.secondTick = secondTick
         }
         if(sounds.isEmpty == false) {
-            if((sounds["sounds"]) == false || (self.sounds["timer"]) == false) {
+            if((sounds["sounds"]) == false || (self.sounds["secondtick"]) == false) {
                 self.secondTick!.volume = 0
             }
         }
@@ -469,7 +469,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             self.backgroundMusic?.numberOfLoops = -1 //loop indefinitely
         }
         if(sounds.isEmpty == false) {
-            if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
+            if((sounds["sounds"]) == false || (self.sounds["background"]) == false) {
                 self.backgroundMusic!.volume = 0
             }
         }
@@ -479,7 +479,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             self.cheering = cheering
         }
         if(sounds.isEmpty == false) {
-            if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
+            if((sounds["sounds"]) == false || (self.sounds["cheering"]) == false) {
                 self.cheering!.volume = 0
             }
         }
@@ -489,7 +489,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             self.enthusiasticApplause = enthusiasticApplause
         }
         if(sounds.isEmpty == false) {
-            if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
+            if((sounds["sounds"]) == false || (self.sounds["loudapplause"]) == false) {
                 self.enthusiasticApplause!.volume = 0
             }
         }
@@ -499,7 +499,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             self.politeApplause = politeApplause
         }
         if(sounds.isEmpty == false) {
-            if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
+            if((sounds["sounds"]) == false || (self.sounds["politeapplause"]) == false) {
                 self.politeApplause!.volume = 0
             }
         }
@@ -509,7 +509,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             self.gamestart = gamestart
         }
         if(sounds.isEmpty == false) {
-            if((sounds["sounds"]) == false || (self.sounds["gameplay"]) == false) {
+            if((sounds["sounds"]) == false || (self.sounds["begingame"]) == false) {
                 self.gamestart!.volume = 0
             }
         }
@@ -777,14 +777,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             cols = gameObject.cols
             totalTime = Int(gameObject.totalTime) * 60       // in seconds
             sounds = gameObject.sounds
-            // theme = gameObject.theme
         }
     }
-
-
-//    @IBAction func goBackBtn(sender: AnyObject) {
-//        dismissViewControllerAnimated(true, completion: nil)
-//    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.

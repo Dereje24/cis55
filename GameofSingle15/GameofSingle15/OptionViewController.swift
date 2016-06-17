@@ -14,12 +14,14 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet var cutOffTime: UILabel!
     @IBOutlet var sliderX: UISlider!
     
-    
     @IBOutlet var soundsSwitch: UISwitch!
-    @IBOutlet var timerSwitch: UISwitch!
-    @IBOutlet var playSwitch: UISwitch!
-    @IBOutlet var conclusionSwitch: UISwitch!
     @IBOutlet var moveSwitch: UISwitch!
+    @IBOutlet var tickingSwitch: UISwitch!
+    @IBOutlet var bgmSwitch: UISwitch!
+    @IBOutlet var cheeringSwitch: UISwitch!
+    @IBOutlet var loudAppSwitch: UISwitch!
+    @IBOutlet var politeAppSwitch: UISwitch!
+    @IBOutlet var beginningSwitch: UISwitch!
     
     let pickerDataSource = ["Easy(3x3)", "Medium(Default 4x4)", "Hard(5x5)"]
     let pickerDefaultValue = 1
@@ -113,9 +115,12 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     func initializeSounds() {
         soundsSwitch.setOn(true, animated: true)
         moveSwitch.setOn(true, animated: true)
-        conclusionSwitch.setOn(true, animated: true)
-        playSwitch.setOn(true, animated: true)
-        timerSwitch.setOn(true, animated: true)
+        tickingSwitch.setOn(true, animated: true)
+        bgmSwitch.setOn(true, animated: true)
+        cheeringSwitch.setOn(true, animated: true)
+        loudAppSwitch.setOn(true, animated: true)
+        politeAppSwitch.setOn(true, animated: true)
+        beginningSwitch.setOn(true, animated: true)
         
         soundsSwitch.addTarget(self, action: #selector(OptionViewController.stateChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
     }
@@ -124,22 +129,36 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     func stateChanged(switchState: UISwitch) {
         if (switchState.on) {
             moveSwitch.setOn(true, animated: true)
-            conclusionSwitch.setOn(true, animated: true)
-            playSwitch.setOn(true, animated: true)
-            timerSwitch.setOn(true, animated: true)
+            tickingSwitch.setOn(true, animated: true)
+            bgmSwitch.setOn(true, animated: true)
+            cheeringSwitch.setOn(true, animated: true)
+            loudAppSwitch.setOn(true, animated: true)
+            politeAppSwitch.setOn(true, animated: true)
+            beginningSwitch.setOn(true, animated: true)
+            
             moveSwitch.enabled = true
-            conclusionSwitch.enabled = true
-            playSwitch.enabled = true
-            timerSwitch.enabled = true
+            tickingSwitch.enabled = true
+            bgmSwitch.enabled = true
+            cheeringSwitch.enabled = true
+            loudAppSwitch.enabled = true
+            politeAppSwitch.enabled = true
+            beginningSwitch.enabled = true
         } else {
             moveSwitch.setOn(false, animated: true)
-            conclusionSwitch.setOn(false, animated: true)
-            playSwitch.setOn(false, animated: true)
-            timerSwitch.setOn(false, animated: true)
+            tickingSwitch.setOn(false, animated: true)
+            bgmSwitch.setOn(false, animated: true)
+            cheeringSwitch.setOn(false, animated: true)
+            loudAppSwitch.setOn(false, animated: true)
+            politeAppSwitch.setOn(false, animated: true)
+            beginningSwitch.setOn(false, animated: true)
+            
             moveSwitch.enabled = false
-            conclusionSwitch.enabled = false
-            playSwitch.enabled = false
-            timerSwitch.enabled = false
+            tickingSwitch.enabled = false
+            bgmSwitch.enabled = false
+            cheeringSwitch.enabled = false
+            loudAppSwitch.enabled = false
+            politeAppSwitch.enabled = false
+            beginningSwitch.enabled = false
         }
     }
     
@@ -147,8 +166,11 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     func getSoundConfiguration() {
         sounds["sounds"] = soundsSwitch.on
         sounds["move"] = moveSwitch.on
-        sounds["gameconclusion"] = conclusionSwitch.on
-        sounds["gameplay"] = playSwitch.on
-        sounds["timer"] = timerSwitch.on
+        sounds["secondtick"] = tickingSwitch.on
+        sounds["background"] = bgmSwitch.on
+        sounds["cheering"] = cheeringSwitch.on
+        sounds["loudapplause"] = loudAppSwitch.on
+        sounds["politeapplause"] = politeAppSwitch.on
+        sounds["begingame"] = beginningSwitch.on
     }
 }
