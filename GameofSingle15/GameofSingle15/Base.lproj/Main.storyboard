@@ -441,6 +441,9 @@
                                 <color key="textColor" red="0.4823529412" green="0.039215686270000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Achievement" translatesAutoresizingMaskIntoConstraints="NO" id="HAr-Mf-rN2">
+                                <rect key="frame" x="271" y="11" width="71" height="66"/>
+                            </imageView>
                         </subviews>
                     </view>
                     <connections>
@@ -472,6 +475,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Achievement" width="442" height="427"/>
         <image name="Menu_Base" width="1190" height="1306"/>
         <image name="Ok" width="162" height="166"/>
         <image name="Pause" width="162" height="166"/>
