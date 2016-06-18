@@ -50,6 +50,7 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         initializeSounds()
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -75,10 +76,10 @@ class OptionViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
 
     func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
         let pickerLabel = UILabel()
-        pickerLabel.textColor = UIColor.blackColor()
+        pickerLabel.textColor = UIColor.init(red: 123/255.0, green: 10/255.0, blue: 65/255.0, alpha: 1)
         pickerLabel.text = self.pickerDataSource[row]
-        pickerLabel.font = UIFont(name: (pickerLabel.font?.fontName)!, size: 17)
-        //pickerLabel.font = UIFont(name: "System", size: 14) // In this use your custom font
+        //pickerLabel.font = UIFont(name: (pickerLabel.font?.fontName)!, size: 17)
+        pickerLabel.font = UIFont(name: "Chalkboard SE", size: 17) // In this use your custom font
         pickerLabel.textAlignment = NSTextAlignment.Left
         return pickerLabel
     }
