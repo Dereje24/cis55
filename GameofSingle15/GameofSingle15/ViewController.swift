@@ -18,7 +18,9 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
     @IBOutlet weak var showBestMoveLabel: UILabel! // display best move record
 
     var gameObject: GameObject!     // obtain game settings from Settings view controller
-
+    let muteBtn = UIButton(type: .Custom)
+    let unmuteBtn = UIButton(type: .Custom)
+    
     let backgroundView = UIImageView() // set background view
     let playgroundView = UIImageView() // an image view for playground to add on
     let pausedView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Dark)) // display a blurry view when paused
@@ -46,8 +48,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
 
     let viewFrameMargin = 10 //margin around entire edge
     let cellFrameMargin = 2  //margin around each cell
-    var rows  = 4; //4x4 game initially
-    var cols  = 4;
+    var rows  = 2; //4x4 game initially
+    var cols  = 2;
 
     var emptyCellX = 0
     var emptyCellY = 0
@@ -183,6 +185,7 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             //msgAlert.show()
 
             saveRecords()
+            print(timeArr)
             //temporary: pick one of the cheers at random
             // later we will have logic that knows if you have best score, or top 10, or not, and plays appropriate music
             backgroundMusic?.stop() //stop bkgnd music
@@ -204,7 +207,8 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
 
             let alert = UIAlertController(title: "VICTORY!", message:"Play Again?", preferredStyle: .Alert)
 
-            alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in})
+            alert.addAction(UIAlertAction(title: "Cancel", style: .Default){ _ in self.dismissViewControllerAnimated(true, completion: nil); self.backgroundMusic?.stop()})
+            
             alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in self.restartGame(); self.backgroundMusic?.stop()})
             //attempt to present uialertcontroller which is already presenting!!
             self.presentViewController(alert, animated: true){}
@@ -531,12 +535,12 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
         playgroundView.userInteractionEnabled = true
 
         timerLabel.layer.borderWidth  = 2
-        timerLabel.layer.borderColor  = UIColor.init(red: 170.0/255.0, green: 49.0/255.0, blue: 80.0/255.0, alpha: 1).CGColor
+        timerLabel.layer.borderColor  = UIColor.init(red: 244.0/255.0, green: 174.0/255.0, blue: 28.0/255.0, alpha: 1).CGColor
         timerLabel.clipsToBounds = true
         timerLabel.layer.cornerRadius = 10
 
         movesLabel.layer.borderWidth  = 2
-        movesLabel.layer.borderColor  = UIColor.init(red: 170.0/255.0, green: 49.0/255.0, blue: 80.0/255.0, alpha: 1).CGColor
+        movesLabel.layer.borderColor  = UIColor.init(red: 244.0/255.0, green: 174.0/255.0, blue: 28.0/255.0, alpha: 1).CGColor
         movesLabel.clipsToBounds = true
         movesLabel.layer.cornerRadius = 10
 
@@ -678,6 +682,13 @@ class ViewController: UIViewController, NSFetchedResultsControllerDelegate{
             isPaused = true
             backgroundMusic?.pause() //pause bkgnd music
         }
+    }
+   
+    func muteSounds(sender: AnyObject) {
+        
+        
+        
+        backgroundMusic?.stop()
     }
 
 
